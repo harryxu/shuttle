@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml"
+    layout="vertical"
+    creationComplete="init();"
+    >
+    
+    <mx:Script>
+        <![CDATA[
+            import cn.geckos.airup.managers.AccountsManager;
+            
+            public function init():void
+            {
+                var am:AccountsManager = new AccountsManager();
+                
+                trace( am.addAccount('harry') );
+                
+                trace(am.getAccount('harry'));
+            }
+            
+        ]]>
+    </mx:Script>
+    
+</mx:WindowedApplication>
