@@ -14,7 +14,7 @@
                 
                 trace( am.addAccount('harry') );
                 
-                trace(am.getAccount('harry'));
+                trace(am.getDefaultAccount());
             }
             
         ]]>

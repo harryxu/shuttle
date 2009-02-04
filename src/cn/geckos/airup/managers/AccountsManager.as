@@ -27,6 +27,9 @@ public class AccountsManager
      */
     private var localStore:File;
     
+    /**
+     * 账户配置文件
+     */
     private var accountsFile:File;
     
     private var _accountContent:XML;
@@ -54,6 +57,12 @@ public class AccountsManager
     public function addAccount(id:String, service:String='flickr'):Boolean
     {
         if( !getAccount(id, service) ) {
+            
+            // 如果目前没有任何账户，就将此账户设成默认账户
+            if( XMLList(getAccountsContent().account).length() < 1 ) {
+                setDefaultAccount(id, service, false);
+            }
+            
             var accountNode:XMLNode = new XMLNode(XMLNodeType.ELEMENT_NODE, 'account');
             
             var idNode:XMLNode = new XMLNode(XMLNodeType.ELEMENT_NODE, 'id'); 
@@ -67,6 +76,7 @@ public class AccountsManager
             
             getAccountsContent().appendChild( new XML(accountNode) );
             
+            // 保存到文件
             saveAccountsContent();
             
             return true;
@@ -92,6 +102,36 @@ public class AccountsManager
         return XML(account[0]);
     }
     
+    /**
+     * 设置默认的使用账户
+     * @param id
+     * @param service
+     * @param save
+     * 
+     */
+    public function setDefaultAccount(id:String, service:String, save:Boolean=true):void
+    {
+        var accounts:XML = getAccountsContent();
+        
+        accounts.defaultAccount.@id = id;
+        accounts.defaultAccount.@service = service;
+        
+        if( save ) {
+            saveAccountsContent();
+        }
+    }
+    
+    /**
+     * 
+     * @return 
+     * 
+     */
+    public function getDefaultAccount():XML
+    {
+        var account:XMLList = getAccountsContent().defaultAccount;
+        
+        return getAccount(account[0].@id, account.@service);
+    }
     
     /**
      * 删除一个账户
@@ -118,7 +158,6 @@ public class AccountsManager
         }
         
         if( !_accountContent ) {
-        
             var stream:FileStream = new FileStream();
             stream.open(accountsFile, FileMode.READ);
             var string:String = stream.readMultiByte(accountsFile.size, File.systemCharset);
