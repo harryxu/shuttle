@@ -38,7 +38,6 @@ package cn.geckos.airuptests.view {
 			super(NAME, viewComponent);
 			
 			_unitTestForm = new UnitTestForm();
-			_unitTestForm.addEventListener(UnitTestForm.CLOSE, handleTestFormClose);
 			showTestForm();
 		}
 		
@@ -47,20 +46,10 @@ package cn.geckos.airuptests.view {
 		****************************************/
 		
 		private function showTestForm():void {
-			PopUpManager.addPopUp(_unitTestForm as IFlexDisplayObject, this.app, true);
-			PopUpManager.centerPopUp(_unitTestForm);
+			//PopUpManager.addPopUp(_unitTestForm as IFlexDisplayObject, this.app, true);
+			//PopUpManager.centerPopUp(_unitTestForm);
+			app.addChild(_unitTestForm);
 		}
 		
-		private function hideTestForm():void {
-			PopUpManager.removePopUp(_unitTestForm);
-		}
-		
-		/****************************************
-		 * EVENT HANDLERS
-		****************************************/
-		
-		private function handleTestFormClose(e:Event):void {
-			hideTestForm();
-		}
 	}
 }

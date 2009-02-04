@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml"
-	layout="absolute"
+	layout="horizontal"
+	paddingBottom="0"
+	paddingLeft="0"
+	paddingRight="0"
+	paddingTop="0"
 	creationComplete="handleCreationComplete(event)"
 	>
 	
@@ -18,6 +22,7 @@
 			
 			private function handleCreationComplete(e:Event):void {
 				facade.startup(this);
+				facade.sendNotification(ApplicationFacade.RUN_TESTS, this);
 			}
 			
 			private function handleRunTestsClick(e:Event):void {
@@ -26,5 +31,4 @@
 		]]>
 	</mx:Script>
 	
-	<mx:Button label="Run Tests" click="handleRunTestsClick(event)" />
 </mx:WindowedApplication>

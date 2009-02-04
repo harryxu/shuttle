@@ -5,7 +5,7 @@ public class Notices
     /**
      * model获取到了flickr登录URL
      */    
-    public static const FLICKR_LOGIN:String = 'flickrLogin';
+    public static const FLICKR_GOT_AUTH_FROB:String = 'flickrGotAuthFrob';
     
     /**
      * 获取到了flickr auth token 
