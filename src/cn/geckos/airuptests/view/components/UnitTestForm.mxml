@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flexui="flexunit.flexui.*"
+	width="1000"
+	height="600"
+	title="Users Unit Test"
+	creationComplete="handleCreationComplete(event)"
+	>
+	
+	<mx:Metadata>
+		[Event(name="close", type="com.andculture.puremvcflexunittesting.example.view.components.UnitTestForm")]
+	</mx:Metadata>
+	
+	<mx:Script>
+		<![CDATA[
+			import flexunit.framework.TestSuite;
+			/**
+			 * Event type of the close dialog event.
+			 */
+			public static const CLOSE:String = "close";
+			
+			public function handleCreationComplete(e:Event):void {
+				// Add test cases
+				var suite:TestSuite = new TestSuite();
+				
+				// Run tests
+				testRunner.test = suite;
+				testRunner.startTest();
+			}
+			
+			public function handleClose(e:Event):void {
+				dispatchEvent(new Event(CLOSE));
+			}
+		]]>
+	</mx:Script>
+	
+	<flexui:TestRunnerBase id="testRunner" width="100%" height="100%" />
+	
+	<mx:ControlBar>
+		<mx:Spacer width="100%" />
+		<mx:Button id="wClose" label="Close" click="handleClose(event)" />
+	</mx:ControlBar>
+</mx:Panel>

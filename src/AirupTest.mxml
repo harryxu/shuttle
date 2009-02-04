@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml"
+	layout="absolute"
+	creationComplete="handleCreationComplete(event)"
+	>
+	
+	<mx:Script>
+		<![CDATA[
+		    import cn.geckos.airuptests.ApplicationFacade;
+			public static const NAME:String = "Example";
+			
+			/**
+			 * Gets the ApplicationFacade instance for this application.
+			 */
+			private function get facade():ApplicationFacade {
+				return ApplicationFacade.getInstance();
+			}
+			
+			private function handleCreationComplete(e:Event):void {
+				facade.startup(this);
+			}
+			
+			private function handleRunTestsClick(e:Event):void {
+				facade.sendNotification(ApplicationFacade.RUN_TESTS, this);
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Button label="Run Tests" click="handleRunTestsClick(event)" />
+</mx:WindowedApplication>
