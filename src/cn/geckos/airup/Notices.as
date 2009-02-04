@@ -2,6 +2,16 @@ package cn.geckos.airup
 {
 public class Notices
 {
+    
+    /**
+     * 没有默认账户
+     */
+    public static const NO_DEFAULT_ACCOUNT:String = 'noDefaultAccount';
+    
+    //
+    //  Flickr 服务相关
+    //
+    
     /**
      * model获取到了flickr登录URL
      */    
