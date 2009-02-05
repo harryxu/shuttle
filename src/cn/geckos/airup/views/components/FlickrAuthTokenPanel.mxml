@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel 
+    xmlns:mx="http://www.adobe.com/2006/mxml" 
+    layout="vertical"
+    width="300" 
+    horizontalAlign="center">
+    
+    <mx:Script>
+        <![CDATA[
+            
+            public static const GET_TOKEN:String = 'getToken';
+            
+            [Bindable]
+            public var loginURL:String;
+            
+        ]]>
+    </mx:Script>
+    
+    <mx:Text text="Please open this url and auth."/>
+    <mx:TextInput text="{loginURL}" width="100%" editable="false"/>
+    <mx:Button 
+        id="completeBtn" 
+        label="Complete"
+        click="dispatchEvent(new Event(GET_TOKEN))" 
+        />
+    
+</mx:Panel>

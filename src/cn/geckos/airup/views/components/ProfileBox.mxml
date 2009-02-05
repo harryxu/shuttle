@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+    <mx:Image id="avatar"/>
+    <mx:Label id="nameLabel"/>
+    
+    
+    <mx:Button id="signBtn" label="signin" visible="false"/>
+</mx:HBox>

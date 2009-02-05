@@ -57,6 +57,7 @@ public class FlickrAuthProxy extends Proxy
 	{
 	    service.permission = permission;
 	    service.auth.getFrob();
+	    trace('getting flickr frob');
 	}
 	
 	/**

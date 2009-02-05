@@ -2,6 +2,10 @@ package cn.geckos.airup
 {
 public class Notices
 {
+    /**
+     * 登录默认账户
+     */
+    public static const AUTH_DEFAULT_ACCOUNT:String = 'authDefaultAccount';
     
     /**
      * 没有默认账户
@@ -11,6 +15,10 @@ public class Notices
     //
     //  Flickr 服务相关
     //
+    
+    public static const GET_FLICKR_AUTH_FROB:String = 'getFlickrAuthFrob';
+    
+    public static const GET_FLICKR_AUTH_TOKEN:String = 'getFlickrAuthToken';
     
     /**
      * model获取到了flickr登录URL

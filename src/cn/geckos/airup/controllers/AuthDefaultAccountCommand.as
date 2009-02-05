@@ -21,6 +21,6 @@ public class AuthDefaultAccountCommand extends SimpleCommand
             proxy.auth(account.id.toString());
         }
         
-    }        
+    }
 }
 }

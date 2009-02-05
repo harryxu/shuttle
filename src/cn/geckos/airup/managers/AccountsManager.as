@@ -130,6 +130,10 @@ public class AccountsManager
     {
         var account:XMLList = getAccountsContent().defaultAccount;
         
+        if( account.length() < 1 ) {
+            return null;
+        }
+        
         return getAccount(account[0].@id, account.@service);
     }
     
