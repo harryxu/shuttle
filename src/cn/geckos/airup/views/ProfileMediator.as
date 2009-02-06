@@ -4,6 +4,8 @@ import cn.geckos.airup.Notices;
 import cn.geckos.airup.views.components.FlickrAuthTokenPanel;
 import cn.geckos.airup.views.components.ProfileBox;
 
+import com.adobe.webapis.flickr.AuthResult;
+
 import flash.display.DisplayObject;
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -44,9 +46,9 @@ public class ProfileMediator extends Mediator
     {
         return [
             Notices.NO_DEFAULT_ACCOUNT,
-            Notices.FLICKR_GOT_AUTH_FROB,
-            Notices.FLICKR_GOT_AUTH_TOKEN,
-            Notices.FLICKR_CHECK_TOKEN_OK,
+            Notices.GET_FLICKR_AUTH_FROB_SUCCESS,
+            Notices.GET_FLICKR_AUTH_TOKEN_SUCCESS,
+            Notices.CHECK_FLICKR_TOKEN_OK,
         ];
     }
     
@@ -59,8 +61,9 @@ public class ProfileMediator extends Mediator
             case Notices.NO_DEFAULT_ACCOUNT:
                 component.signBtn.visible = true;
 	            break;
-	            
-	        case Notices.FLICKR_GOT_AUTH_FROB:
+	        
+	        // 得到 auth frob
+	        case Notices.GET_FLICKR_AUTH_FROB_SUCCESS:
 	           var loginURL:String = data['loginURL'];
 	           navigateToURL(new URLRequest(loginURL));
 	           
@@ -72,8 +75,19 @@ public class ProfileMediator extends Mediator
 	           PopUpManager.centerPopUp(_authTokenPanel);
 	           break;
 	        
-	        case Notices.FLICKR_GOT_AUTH_TOKEN:
+	        // 得到 auth token
+	        case Notices.GET_FLICKR_AUTH_TOKEN_SUCCESS:
 	           PopUpManager.removePopUp(_authTokenPanel);
+	           
+	           // 通知将账户保存到本地配置文件中
+	           sendNotification(Notices.ADD_ACCOUNT, {
+	                    'id': AuthResult(data).user.username,
+	               'service': 'flickr'
+	           });
+	           break;
+	           
+	        case Notices.CHECK_FLICKR_TOKEN_OK:
+	           
 	           break;
         } 
     }

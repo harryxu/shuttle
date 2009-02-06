@@ -23,9 +23,9 @@ public class FlickrAuthProxy extends Proxy
         return data as FlickrService;
     }
     
-    public function FlickrAuthProxy(proxyName:String=null, data:Object=null)
+    public function FlickrAuthProxy(proxyName:String, service:FlickrService)
     {
-        super(proxyName, data);
+        super(proxyName, service);
         
         service.addEventListener(FlickrResultEvent.AUTH_GET_FROB, getFrobHandler, false, 0, true);
         service.addEventListener(FlickrResultEvent.AUTH_GET_TOKEN, getTokenHandler, false, 0, true);
@@ -67,7 +67,7 @@ public class FlickrAuthProxy extends Proxy
 	{
 	    frob = event.data.frob;
 	    
-	    sendNotification(Notices.FLICKR_GOT_AUTH_FROB, {
+	    sendNotification(Notices.GET_FLICKR_AUTH_FROB_SUCCESS, {
 	            'frob': frob,
 	        'loginURL': service.getLoginURL(frob, service.permission)
 	    });
@@ -97,7 +97,7 @@ public class FlickrAuthProxy extends Proxy
 	    bytes.writeUTFBytes(result.token);
 	    EncryptedLocalStore.setItem('flickr_' + result.user.username, bytes);
 	     
-	    sendNotification(Notices.FLICKR_GOT_AUTH_TOKEN, result);
+	    sendNotification(Notices.GET_FLICKR_AUTH_TOKEN_SUCCESS, result);
 	}
 	
 	/**
@@ -112,10 +112,10 @@ public class FlickrAuthProxy extends Proxy
 	private function checkTokenltHandler(event:FlickrResultEvent):void
 	{
 	    if( AuthResult(event.data.auth).perms == service.permission ) {
-	        sendNotification(Notices.FLICKR_CHECK_TOKEN_OK);
+	        sendNotification(Notices.CHECK_FLICKR_TOKEN_OK);
 	    }
 	    else {
-	        sendNotification(Notices.FLICKR_CHECK_TOKEN_FAILD);
+	        sendNotification(Notices.CHECK_FLICKR_TOKEN_FAILD);
 	    }
 	}
 	
