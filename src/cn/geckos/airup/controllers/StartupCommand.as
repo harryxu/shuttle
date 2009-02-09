@@ -24,6 +24,7 @@ public class StartupCommand extends SimpleCommand
         // register commands
         
         facade.registerCommand(Notices.AUTH_DEFAULT_ACCOUNT, AuthDefaultAccountCommand);
+        facade.registerCommand(Notices.ADD_ACCOUNT, AddAccountCommand);
         facade.registerCommand(Notices.GET_FLICKR_AUTH_FROB, GetFlickrAuthFrobCommand);
         facade.registerCommand(Notices.GET_FLICKR_AUTH_TOKEN, GetFlickrAuthTokenCommand);
         

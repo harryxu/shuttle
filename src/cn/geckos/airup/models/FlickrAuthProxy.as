@@ -111,12 +111,7 @@ public class FlickrAuthProxy extends Proxy
 	
 	private function checkTokenltHandler(event:FlickrResultEvent):void
 	{
-	    if( AuthResult(event.data.auth).perms == service.permission ) {
-	        sendNotification(Notices.CHECK_FLICKR_TOKEN_OK);
-	    }
-	    else {
-	        sendNotification(Notices.CHECK_FLICKR_TOKEN_FAILD);
-	    }
+        sendNotification(Notices.CHECK_FLICKR_TOKEN_OK);
 	}
 	
 	

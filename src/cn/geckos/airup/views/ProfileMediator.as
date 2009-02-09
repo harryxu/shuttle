@@ -86,8 +86,9 @@ public class ProfileMediator extends Mediator
 	           });
 	           break;
 	           
+	        //
 	        case Notices.CHECK_FLICKR_TOKEN_OK:
-	           
+	           trace('auth token ok');
 	           break;
         } 
     }

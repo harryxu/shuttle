@@ -10,7 +10,7 @@ public class AddAccountCommand extends SimpleCommand
     override public function execute(notification:INotification):void
     {
         var data:Object = notification.getBody();
-        AccountsManager.getInstance().addAccount(data.id, data.service));
+        AccountsManager.getInstance().addAccount(data.id, data.service);
     }
         
 }
