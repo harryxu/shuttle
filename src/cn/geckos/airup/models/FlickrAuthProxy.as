@@ -111,7 +111,7 @@ public class FlickrAuthProxy extends Proxy
 	
 	private function checkTokenltHandler(event:FlickrResultEvent):void
 	{
-        sendNotification(Notices.CHECK_FLICKR_TOKEN_OK);
+        sendNotification(Notices.CHECK_FLICKR_TOKEN_OK, event.data.auth);
 	}
 	
 	

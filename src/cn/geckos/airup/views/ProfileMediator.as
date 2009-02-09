@@ -79,16 +79,16 @@ public class ProfileMediator extends Mediator
 	        case Notices.GET_FLICKR_AUTH_TOKEN_SUCCESS:
 	           PopUpManager.removePopUp(_authTokenPanel);
 	           
+	           component.signBtn.visible = false;
+	           
 	           // 通知将账户保存到本地配置文件中
 	           sendNotification(Notices.ADD_ACCOUNT, {
 	                    'id': AuthResult(data).user.username,
 	               'service': 'flickr'
 	           });
-	           break;
-	           
-	        //
 	        case Notices.CHECK_FLICKR_TOKEN_OK:
 	           trace('auth token ok');
+	           component.nameLabel.text = AuthResult(data).user.username;
 	           break;
         } 
     }
