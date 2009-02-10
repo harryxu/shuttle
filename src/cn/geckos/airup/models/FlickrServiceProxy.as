@@ -12,7 +12,7 @@ import flash.utils.ByteArray;
 
 import org.puremvc.as3.patterns.proxy.Proxy;
 
-public class FlickrAuthProxy extends Proxy
+public class FlickrServiceProxy extends Proxy
 {
     public static const NAME:String = 'FlickrAuthProxy';
     
@@ -23,14 +23,17 @@ public class FlickrAuthProxy extends Proxy
         return data as FlickrService;
     }
     
-    public function FlickrAuthProxy(proxyName:String, service:FlickrService)
+    public function FlickrServiceProxy(proxyName:String, service:FlickrService)
     {
         super(proxyName, service);
         
         service.addEventListener(FlickrResultEvent.AUTH_GET_FROB, getFrobHandler, false, 0, true);
         service.addEventListener(FlickrResultEvent.AUTH_GET_TOKEN, getTokenHandler, false, 0, true);
         service.addEventListener(FlickrResultEvent.AUTH_CHECK_TOKEN, checkTokenltHandler, false, 0, true);
+        service.addEventListener(FlickrResultEvent.PEOPLE_GET_INFO, getInfoHandler, false, 0, true);
     }
+    
+    
 	
 	/**
 	 * 
@@ -114,6 +117,20 @@ public class FlickrAuthProxy extends Proxy
         sendNotification(Notices.CHECK_FLICKR_TOKEN_OK, event.data.auth);
 	}
 	
+    /**
+     * 获取用户信息
+     * @param id
+     * 
+     */
+    public function getUserInfo(id:String):void
+    {
+        service.people.getInfo(id);
+    }
+    
+    private function getInfoHandler(event:FlickrResultEvent):void
+    {
+        sendNotification(Notices.GET_FLICKR_USER_INFO_SUCCESS, event.data.user);
+    }
 	
 }
 }

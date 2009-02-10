@@ -2,8 +2,7 @@ package cn.geckos.airup.controllers
 {
 import cn.geckos.airup.Notices;
 import cn.geckos.airup.flickr.Developer;
-import cn.geckos.airup.models.FlickrAuthProxy;
-import cn.geckos.airup.models.FlickrPeopleProxy;
+import cn.geckos.airup.models.FlickrServiceProxy;
 import cn.geckos.airup.views.ProfileMediator;
 
 import com.adobe.webapis.flickr.FlickrService;
@@ -27,16 +26,14 @@ public class StartupCommand extends SimpleCommand
         facade.registerCommand(Notices.ADD_ACCOUNT, AddAccountCommand);
         facade.registerCommand(Notices.GET_FLICKR_AUTH_FROB, GetFlickrAuthFrobCommand);
         facade.registerCommand(Notices.GET_FLICKR_AUTH_TOKEN, GetFlickrAuthTokenCommand);
+        facade.registerCommand(Notices.GET_FLICKR_USER_INFO, GetFlickrUserInfoCommand);
         
         // register proxies
         
         var flickrService:FlickrService = new FlickrService(Developer.API_KEY);
         flickrService.secret = Developer.SECRET;
         
-        facade.registerProxy( new FlickrAuthProxy(FlickrAuthProxy.NAME, flickrService) );
-        
-        facade.registerProxy( new FlickrPeopleProxy(FlickrPeopleProxy.NAME, flickrService) );
-        
+        facade.registerProxy( new FlickrServiceProxy(FlickrServiceProxy.NAME, flickrService) );
         // 
         
         sendNotification(Notices.AUTH_DEFAULT_ACCOUNT);

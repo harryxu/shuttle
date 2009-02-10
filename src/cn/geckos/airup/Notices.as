@@ -34,6 +34,10 @@ public class Notices
     public static const GET_FLICKR_AUTH_TOKEN_SUCCESS:String = 'flickrGotAuthToken';
     public static const CHECK_FLICKR_TOKEN_OK:String         = 'flickrCheckTokenOK';
     public static const CHECK_FLICKR_TOKEN_FAILD:String      = 'flickrCheckTokenFailed';
+    
+    // people
+    public static const GET_FLICKR_USER_INFO:String     = 'getFlickrUserInfo';
+    public static const GET_FLICKR_USER_INFO_SUCCESS:String = 'getFilckrUserInfoSuccess';
 
 }
 }

@@ -1,7 +1,7 @@
 package cn.geckos.airuptests.model
 {
 import cn.geckos.airup.Notices;
-import cn.geckos.airup.models.FlickrAuthProxy;
+import cn.geckos.airup.models.FlickrServiceProxy;
 import cn.geckos.airuptests.ApplicationFacade;
 
 import com.andculture.puremvcflexunittesting.PureMVCNotificationEvent;
@@ -11,9 +11,9 @@ import org.puremvc.as3.core.View;
 
 public class FlickrAuthProxyTest extends PureMVCTestCase
 {
-    public function get proxy():FlickrAuthProxy
+    public function get proxy():FlickrServiceProxy
     {
-        return ApplicationFacade.getInstance().retrieveProxy(FlickrAuthProxy.NAME) as FlickrAuthProxy;
+        return ApplicationFacade.getInstance().retrieveProxy(FlickrServiceProxy.NAME) as FlickrServiceProxy;
     }
     
     public function FlickrAuthProxyTest(methodName:String=null)

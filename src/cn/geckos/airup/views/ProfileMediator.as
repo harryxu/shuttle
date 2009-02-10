@@ -5,6 +5,7 @@ import cn.geckos.airup.views.components.FlickrAuthTokenPanel;
 import cn.geckos.airup.views.components.ProfileBox;
 
 import com.adobe.webapis.flickr.AuthResult;
+import com.adobe.webapis.flickr.User;
 
 import flash.display.DisplayObject;
 import flash.events.Event;
@@ -49,6 +50,7 @@ public class ProfileMediator extends Mediator
             Notices.GET_FLICKR_AUTH_FROB_SUCCESS,
             Notices.GET_FLICKR_AUTH_TOKEN_SUCCESS,
             Notices.CHECK_FLICKR_TOKEN_OK,
+            Notices.GET_FLICKR_USER_INFO_SUCCESS,
         ];
     }
     
@@ -88,7 +90,17 @@ public class ProfileMediator extends Mediator
 	           });
 	        case Notices.CHECK_FLICKR_TOKEN_OK:
 	           trace('auth token ok');
-	           component.nameLabel.text = AuthResult(data).user.username;
+	           
+	           var authResult:AuthResult = AuthResult(data);
+	           component.nameLabel.text = authResult.user.username;
+	           sendNotification(Notices.GET_FLICKR_USER_INFO, authResult.user.nsid);
+	           break;
+	           
+	        case Notices.GET_FLICKR_USER_INFO_SUCCESS:
+	           var userInfo:User = User(data);
+	           component.avatar.source = 'http://farm' + userInfo.iconFarm
+	               + '.static.flickr.com/' + userInfo.iconServer + '/buddyicons/' 
+	               + userInfo.nsid + '.jpg';
 	           break;
         } 
     }

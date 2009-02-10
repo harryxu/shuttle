@@ -1,7 +1,7 @@
 package cn.geckos.airuptests.controller {
 	
 	import cn.geckos.airup.flickr.Developer;
-	import cn.geckos.airup.models.FlickrAuthProxy;
+	import cn.geckos.airup.models.FlickrServiceProxy;
 	
 	import com.adobe.webapis.flickr.FlickrService;
 	
@@ -18,7 +18,7 @@ package cn.geckos.airuptests.controller {
 			var flickrService:FlickrService = new FlickrService(Developer.API_KEY);
 			flickrService.secret = Developer.SECRET;
 			
-			facade.registerProxy(new FlickrAuthProxy(FlickrAuthProxy.NAME, flickrService));
+			facade.registerProxy(new FlickrServiceProxy(FlickrServiceProxy.NAME, flickrService));
 			
 			// Register all mediators
 			//this.facade.registerMediator(new ApplicationMediator(app));
