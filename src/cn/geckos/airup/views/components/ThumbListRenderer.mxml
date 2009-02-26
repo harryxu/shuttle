@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box 
+    xmlns:mx="http://www.adobe.com/2006/mxml" 
+    horizontalAlign="center"
+    >
+    
+    <mx:Script>
+        <![CDATA[
+            import cn.geckos.airup.models.vo.ImageVO;
+        ]]>
+    </mx:Script>
+    
+    <mx:Image source="{File(data.file).nativePath}" 
+        horizontalAlign="center" 
+        width="100%" 
+        height="100%" 
+        />
+        
+        <mx:ViewStack id="vs" 
+            selectedIndex="{data.state==ImageVO.NOT_UPLOAD?0:1}"
+            width="100%"
+            >
+            <mx:Box>
+                <mx:Button label="upload" />
+            </mx:Box>
+            
+            <mx:Box width="100%">
+    	        <mx:ProgressBar minWidth="50" width="100%" 
+    	            source="{data.file}"
+    	            label="%3%%"
+    	            labelPlacement="center" 
+    	            height="5"/>
+	        </mx:Box>
+            
+        </mx:ViewStack>
+    
+</mx:Box>

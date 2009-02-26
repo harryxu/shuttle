@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml">
+
+    <mx:Script>
+        <![CDATA[
+            import mx.collections.ArrayCollection;
+            
+            [Bindable]
+            public var listData:ArrayCollection = new ArrayCollection([]);
+            
+            public function removeSelectedItem():void
+            {
+                var indices:Array = list.selectedIndices.concat();
+                // 倒序排列后从大号索引开始删
+                indices.sort(Array.DESCENDING|Array.NUMERIC);
+                for each(var index:int in indices)
+                {
+                    listData.removeItemAt(index);
+                }
+            }
+        ]]>
+    </mx:Script>
+
+    <mx:HBox width="100%">
+	    <mx:Button id="addImgBtn" label="Add Images" />
+	    <mx:Button id="uploadBtn" label="Upload All" enabled="{listData.length>0}" />
+	    <mx:Button
+	        label="Remove" 
+	        enabled="{list.selectedItems.length>0}"
+	        click="removeSelectedItem();"
+	        />
+    </mx:HBox>
+    
+    <mx:HBox width="100%" height="100%">
+    
+        <mx:TileList id="list"
+            dataProvider="{listData}"
+            itemRenderer="cn.geckos.airup.views.components.ThumbListRenderer"
+            width="100%" 
+            height="100%"
+            rowHeight="100"
+            columnWidth="100"
+            allowMultipleSelection="true"
+            allowDragSelection="true"
+            />
+            
+    </mx:HBox>
+    
+</mx:VBox>

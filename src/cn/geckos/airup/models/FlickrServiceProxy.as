@@ -1,6 +1,7 @@
 package cn.geckos.airup.models
 {
 import cn.geckos.airup.Notices;
+import cn.geckos.airup.models.vo.ImageVO;
 
 import com.adobe.webapis.flickr.AuthPerm;
 import com.adobe.webapis.flickr.AuthResult;
@@ -130,6 +131,16 @@ public class FlickrServiceProxy extends Proxy
     private function getInfoHandler(event:FlickrResultEvent):void
     {
         sendNotification(Notices.GET_FLICKR_USER_INFO_SUCCESS, event.data.user);
+    }
+    
+    /**
+     * 
+     * @param imageVO
+     * 
+     */
+    public function upload(imageVO:ImageVO):void
+    {
+        service.upload.upload(imageVO.file);
     }
 	
 }
