@@ -95,6 +95,8 @@ public class FlickrServiceProxy extends Proxy
 	private function getTokenHandler(event:FlickrResultEvent):void
 	{
 	    var result:AuthResult = AuthResult(event.data.auth);
+	    service.token = result.token;
+	    service.permission = result.perms;
 	    
 	    // 将 token 已本地加密存储
 	    var bytes:ByteArray = new ByteArray();
@@ -115,6 +117,8 @@ public class FlickrServiceProxy extends Proxy
 	
 	private function checkTokenltHandler(event:FlickrResultEvent):void
 	{
+	    service.token = event.data.auth.token;
+	    service.permission = event.data.auth.perms;
         sendNotification(Notices.CHECK_FLICKR_TOKEN_OK, event.data.auth);
 	}
 	
@@ -140,7 +144,12 @@ public class FlickrServiceProxy extends Proxy
      */
     public function upload(imageVO:ImageVO):void
     {
-        service.upload.upload(imageVO.file);
+        if( service.upload.upload(imageVO.file) ) {
+            // 
+        }
+        else {
+            //
+        }
     }
 	
 }

@@ -8,7 +8,7 @@
             [Bindable]
             public var listData:ArrayCollection = new ArrayCollection([]);
             
-            public function removeSelectedItem():void
+            public function removeSelectedItems():void
             {
                 var indices:Array = list.selectedIndices.concat();
                 // 倒序排列后从大号索引开始删
@@ -23,11 +23,20 @@
 
     <mx:HBox width="100%">
 	    <mx:Button id="addImgBtn" label="Add Images" />
-	    <mx:Button id="uploadBtn" label="Upload All" enabled="{listData.length>0}" />
-	    <mx:Button
+	    
+	    <mx:PopUpMenuButton id="uploadBtn"
+	        label="Upload"
+	        toolTip="upload selected images"
+	        dataProvider="{['Upload selected images', 'Upload all images']}"
+	        enabled="{listData.length>0}"
+	        />
+	        
+	    <mx:PopUpMenuButton id="removeBtn"
 	        label="Remove" 
-	        enabled="{list.selectedItems.length>0}"
-	        click="removeSelectedItem();"
+	        toolTip="Remove selected images"
+	        dataProvider="{['Remove selected images', 'Remove all images']}"
+	        showRoot="false"
+	        enabled="{listData.length>0}"
 	        />
     </mx:HBox>
     
@@ -42,6 +51,8 @@
             columnWidth="100"
             allowMultipleSelection="true"
             allowDragSelection="true"
+            dragMoveEnabled="true"
+            dragEnabled="true"
             />
             
     </mx:HBox>

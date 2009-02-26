@@ -2,6 +2,7 @@
 <mx:Box 
     xmlns:mx="http://www.adobe.com/2006/mxml" 
     horizontalAlign="center"
+    toolTip="{File(data.file).nativePath}"
     >
     
     <mx:Script>
@@ -16,22 +17,25 @@
         height="100%" 
         />
         
-        <mx:ViewStack id="vs" 
-            selectedIndex="{data.state==ImageVO.NOT_UPLOAD?0:1}"
-            width="100%"
-            >
-            <mx:Box>
-                <mx:Button label="upload" />
-            </mx:Box>
+    <mx:ViewStack id="vs" 
+        selectedIndex="{data.state}"
+        >
+        <mx:Box>
+            <mx:Button label="upload" />
+        </mx:Box>
             
-            <mx:Box width="100%">
-    	        <mx:ProgressBar minWidth="50" width="100%" 
-    	            source="{data.file}"
-    	            label="%3%%"
-    	            labelPlacement="center" 
-    	            height="5"/>
-	        </mx:Box>
+        <mx:Box width="100%">
+	        <mx:ProgressBar minWidth="50" width="100%" 
+	            source="{data.file}"
+	            label="%3%%"
+	            labelPlacement="center" 
+	            height="5"/>
+        </mx:Box>
+        
+        <mx:Box>
+           <mx:Image source="assets/images/xiaoIcon/ok.png" />
+       </mx:Box>
             
-        </mx:ViewStack>
+    </mx:ViewStack>
     
 </mx:Box>

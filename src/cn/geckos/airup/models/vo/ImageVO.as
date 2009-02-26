@@ -14,19 +14,38 @@ public class ImageVO
     
     public var file:FileReference;
     
-    public var state:int = 0;
+    private var _state:int = 0;
+    public function get state():int
+    {
+        return _state;
+    }
+    
     
     public function ImageVO(file:FileReference)
     {
         this.file = file;
         
         file.addEventListener(Event.COMPLETE, completeHandler);
+        file.addEventListener(Event.OPEN, openHandler);
     }
     
     
     protected function completeHandler(event:Event):void
     {
-        state = UPLOADED;
+        _state = UPLOADED;
+    }
+    
+    protected function openHandler(event:Event):void
+    {
+        _state = UPLOADING;
+    }
+    
+    public function cancelUpload():void
+    {
+        file.cancel();
+        if( state == UPLOADING ) {
+            _state = NOT_UPLOAD;
+        }
     }
 
 }

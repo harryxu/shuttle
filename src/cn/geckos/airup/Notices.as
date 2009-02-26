@@ -38,6 +38,9 @@ public class Notices
     // people
     public static const GET_FLICKR_USER_INFO:String     = 'getFlickrUserInfo';
     public static const GET_FLICKR_USER_INFO_SUCCESS:String = 'getFilckrUserInfoSuccess';
+    
+    // upload
+    public static const UPLOAD:String = 'upload';
 
 }
 }
