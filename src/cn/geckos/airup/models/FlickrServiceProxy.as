@@ -1,7 +1,9 @@
 package cn.geckos.airup.models
 {
 import cn.geckos.airup.Notices;
+import cn.geckos.airup.flickr.getUploadRequest;
 import cn.geckos.airup.models.vo.ImageVO;
+import cn.geckos.crazyas.net.SequenceFileUploader;
 
 import com.adobe.webapis.flickr.AuthPerm;
 import com.adobe.webapis.flickr.AuthResult;
@@ -9,6 +11,7 @@ import com.adobe.webapis.flickr.FlickrService;
 import com.adobe.webapis.flickr.events.FlickrResultEvent;
 
 import flash.data.EncryptedLocalStore;
+import flash.net.URLRequest;
 import flash.utils.ByteArray;
 
 import org.puremvc.as3.patterns.proxy.Proxy;
@@ -18,6 +21,8 @@ public class FlickrServiceProxy extends Proxy
     public static const NAME:String = 'FlickrAuthProxy';
     
     private var frob:String;
+    
+    private var uploader:SequenceFileUploader;
     
     protected function get service():FlickrService
     {
@@ -144,11 +149,17 @@ public class FlickrServiceProxy extends Proxy
      */
     public function upload(imageVO:ImageVO):void
     {
-        if( service.upload.upload(imageVO.file) ) {
-            // 
+        if( !uploader ) {
+            uploader = new SequenceFileUploader();
         }
-        else {
-            //
+        
+        var request:URLRequest = getUploadRequest(service, imageVO.file);
+        
+        imageVO.wait();
+        uploader.addFile(imageVO.file, request, 'photo');
+        
+        if( !uploader.running ) {
+            uploader.startUpload();
         }
     }
 	

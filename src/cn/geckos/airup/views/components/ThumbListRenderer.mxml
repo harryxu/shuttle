@@ -6,7 +6,7 @@
     
     <mx:Script>
         <![CDATA[
-            import cn.geckos.airup.utils.SizeFormat;
+            import cn.geckos.crazyas.utils.SizeFormat;
             import cn.geckos.airup.models.vo.ImageVO;
         ]]>
     </mx:Script>
@@ -23,7 +23,7 @@
     <mx:ViewStack id="vs" 
         selectedIndex="{data.state}"
         >
-        <mx:Box>
+        <mx:Box width="100%" horizontalAlign="center">
             <mx:Label text="{File(data.file).name}" maxWidth="145" />
         </mx:Box>
             
@@ -37,7 +37,11 @@
         
         <mx:Box>
            <mx:Image source="assets/images/xiaoIcon/ok.png" />
-       </mx:Box>
+        </mx:Box>
+        
+        <mx:Box>
+            <mx:Label text="waitting..." />
+        </mx:Box>
             
     </mx:ViewStack>
     
