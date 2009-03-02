@@ -159,7 +159,7 @@ public class FlickrServiceProxy extends Proxy
         uploader.addFile(imageVO.file, request, 'photo');
         
         if( !uploader.running ) {
-            uploader.startUpload();
+            uploader.start();
         }
     }
 	

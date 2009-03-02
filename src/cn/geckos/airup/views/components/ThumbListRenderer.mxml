@@ -35,7 +35,7 @@
 	            height="5"/>
         </mx:Box>
         
-        <mx:Box>
+        <mx:Box width="100%" horizontalAlign="center">
            <mx:Image source="assets/images/xiaoIcon/ok.png" />
         </mx:Box>
         
