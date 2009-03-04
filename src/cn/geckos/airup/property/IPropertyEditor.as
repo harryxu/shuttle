@@ -9,7 +9,7 @@ public interface IPropertyEditor
     
     function applyProperty():void;
     
-    function bindTo(property:IPropertyModel):void;
+    function bindTo(model:IPropertyModel):void;
         
 }
 }
