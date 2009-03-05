@@ -1,6 +1,5 @@
 package cn.geckos.airup.property
 {
-import flash.display.DisplayObject;
 import flash.events.Event;
 
 public class BasePropertyEditor implements IPropertyEditor
@@ -8,12 +7,12 @@ public class BasePropertyEditor implements IPropertyEditor
     protected var model:IPropertyModel;
     protected var display:DisplayObject;
     
-    public function BasePropertyEditor(display:DisplayObject)
+    public function BasePropertyEditor(display:Object)
     {
         this.display = display;
     }
     
-    public function get display():DisplayObject
+    public function get display():Object
     {
         return display;
     }
