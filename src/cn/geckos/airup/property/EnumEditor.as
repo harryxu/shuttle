@@ -13,7 +13,7 @@ public class EnumEditor extends BasePropertyEditor
         RadioButtonGroup(display).addEventListener(Event.CHANGE, applyHandler);
     }
     
-    override public function applyHandler(event:Event):void
+    override public function applyProperty():void
     {
         model.value = RadioButtonGroup(display).selectedValue;
     }

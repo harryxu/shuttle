@@ -9,7 +9,7 @@ import mx.events.PropertyChangeEvent;
     
 
 [Bindable]
-public class ImageVO extends EventDispatcher
+dynamic public class ImageVO extends EventDispatcher
 {
     public static const NOT_UPLOAD:int  = 0
     public static const UPLOADING:int   = 1;
