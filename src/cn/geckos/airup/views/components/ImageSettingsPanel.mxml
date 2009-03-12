@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml">
+    <mx:Label text="Title"/>
+    <mx:TextInput id="titleInput" width="100%"/>
+    <mx:Label text="Description"/>
+    <mx:TextArea height="100" id="descInput" width="100%"/>
+    <mx:Label text="Tags"/>
+    <mx:TextInput id="tagsInput" width="100%"/>
+    <mx:Label text="Who can see this photo?"/>
+    
+    <mx:RadioButton id="privateRadio" label="Radio"/>
+    <mx:VBox id="cbbox" enabled="{privateRadio.selected}" paddingLeft="20">
+	    <mx:CheckBox label="Your Friends" id="friCheck"/>
+	    <mx:CheckBox label="Your Family" id="fmlCheck"/>
+    </mx:VBox>
+    <mx:RadioButton id="publicRadio" label="Radio" selected="true"/>
+    
+</mx:VBox>

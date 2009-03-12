@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml">
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:gks="cn.geckos.airup.views.components.*"
+    >
 
     <mx:Script>
         <![CDATA[
@@ -21,6 +23,7 @@
         ]]>
     </mx:Script>
 
+    <!--buttons-->
     <mx:HBox width="100%">
 	    <mx:Button id="addImgBtn" label="Add Images" />
 	    
@@ -54,6 +57,13 @@
             dragMoveEnabled="true"
             dragEnabled="true"
             />
+         
+         <gks:ImageSettingsPanel id="settingsPanel"
+             width="200"
+             height="100%"
+             enabled="{list.selectedItems.length>0}" 
+             />
+             
             
     </mx:HBox>
     

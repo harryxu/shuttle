@@ -20,7 +20,7 @@
 	    toolTip="{File(data.file).nativePath}{'\n'}Size:{SizeFormat.humanRead(File(data.file).size)}"
         />
         
-    <mx:ViewStack id="vs" 
+    <mx:ViewStack id="vs" width="100%"
         selectedIndex="{data.state}"
         >
         <mx:Box width="100%" horizontalAlign="center">

@@ -28,14 +28,14 @@ public class StringEditor extends BasePropertyEditor
     
     override public function applyProperty():void
     {
-        model.value = Object(display).text;
+        model.value = display.text;
     }
     
     override public function bindTo(model:IPropertyModel):void
     {
         super.bindTo(model);
         
-        Object(display).text = String(model.value);
+        display.text = String(model.value);
     }
     
     
