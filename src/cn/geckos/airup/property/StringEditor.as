@@ -35,7 +35,7 @@ public class StringEditor extends BasePropertyEditor
     {
         super.bindTo(model);
         
-        display.text = String(model.value);
+        display.text = String(model.value||'');
     }
     
     

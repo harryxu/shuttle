@@ -5,13 +5,17 @@ public class DefaultPropertyModeal implements IPropertyModel
     protected var propertyName:String;
     protected var owner:Object;
     
-    public function DefaultPropertyModeal(owner:Object, propertyName:String)
+    public function DefaultPropertyModeal(owner:Object, propertyName:String, value:*=null)
     {
         this.propertyName = propertyName;
         this.owner = owner;
+        
+        if( value ) {
+            this.value = value;
+        }
     }
 
-    public function set value(value:*)
+    public function set value(value:*):void
     {
         owner[propertyName] = value;
     }

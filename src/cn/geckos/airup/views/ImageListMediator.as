@@ -2,13 +2,22 @@ package cn.geckos.airup.views
 {
 import cn.geckos.airup.Notices;
 import cn.geckos.airup.models.vo.ImageVO;
+import cn.geckos.airup.property.BooleanEditor;
+import cn.geckos.airup.property.DefaultPropertyModeal;
+import cn.geckos.airup.property.EnumEditor;
+import cn.geckos.airup.property.MultipleObjectsPropertyModel;
+import cn.geckos.airup.property.MultipleTagsPropertyModel;
+import cn.geckos.airup.property.PropertyManager;
+import cn.geckos.airup.property.StringEditor;
 import cn.geckos.airup.views.components.ImageListBox;
+import cn.geckos.airup.views.components.ImageSettingsPanel;
 
 import flash.events.FileListEvent;
 import flash.events.MouseEvent;
 import flash.filesystem.File;
 import flash.net.FileFilter;
 
+import mx.events.ListEvent;
 import mx.events.MenuEvent;
 
 import org.puremvc.as3.interfaces.INotification;
@@ -31,6 +40,8 @@ public class ImageListMediator extends Mediator
      */    
     private var _file:File;
     
+    protected var imageProMgr:PropertyManager;
+    
     
     public function get component():ImageListBox
     {
@@ -50,6 +61,7 @@ public class ImageListMediator extends Mediator
         component.addImgBtn.addEventListener(MouseEvent.CLICK, addImgBtnClickHandler);
         component.uploadBtn.addEventListener(MenuEvent.ITEM_CLICK, uploadBtnClickHandler);
         component.removeBtn.addEventListener(MenuEvent.ITEM_CLICK, removeBtnClickHandler);
+        component.list.addEventListener(ListEvent.CHANGE, listChangeHandler);
     }
     
     private function getFile():File
@@ -143,6 +155,49 @@ public class ImageListMediator extends Mediator
         }
         else {
             component.listData.removeAll();
+        }
+    }
+    
+    /**
+     * image list selection change
+     */
+    private function listChangeHandler(event:ListEvent):void
+    {
+        // very dirty, to be refactory
+        
+        if( !imageProMgr ) {
+            imageProMgr = new PropertyManager();
+            
+            var panel:ImageSettingsPanel = component.settingsPanel
+            
+            imageProMgr.setEditor(new StringEditor(panel.titleInput), 'title');
+            imageProMgr.setEditor(new StringEditor(panel.descInput), 'description');
+            imageProMgr.setEditor(new StringEditor(panel.tagsInput), 'tags');
+            imageProMgr.setEditor(new EnumEditor(panel.mainPrivacy), 'isPublic');
+            imageProMgr.setEditor(new BooleanEditor(panel.friCheck), 'isFriends');
+            imageProMgr.setEditor(new BooleanEditor(panel.fmlCheck), 'isFamily');
+        }
+        
+        if( component.list.selectedItems.length == 1 ) {
+            var data:Object = component.list.selectedItem;
+            if( data['isPublic'] == undefined ) {
+                data['isPublic'] = true;
+            }
+            imageProMgr.getEditor('title').bindTo(new DefaultPropertyModeal(data, 'title'));
+            imageProMgr.getEditor('description').bindTo(new DefaultPropertyModeal(data, 'description'));
+            imageProMgr.getEditor('tags').bindTo(new DefaultPropertyModeal(data, 'tags'));
+            imageProMgr.getEditor('isPublic').bindTo(new DefaultPropertyModeal(data, 'isPublic'));
+            imageProMgr.getEditor('isFriends').bindTo(new DefaultPropertyModeal(data, 'isFriends'));
+            imageProMgr.getEditor('isFamily').bindTo(new DefaultPropertyModeal(data, 'isFamily'));
+        }
+        else if( component.list.selectedItems.length > 1 ){
+            var items:Array = component.list.selectedItems;
+            imageProMgr.getEditor('title').bindTo(new MultipleObjectsPropertyModel(items, 'title'));
+            imageProMgr.getEditor('description').bindTo(new MultipleObjectsPropertyModel(items, 'description'));
+            imageProMgr.getEditor('tags').bindTo(new MultipleTagsPropertyModel(items, 'tags'));
+            imageProMgr.getEditor('isPublic').bindTo(new MultipleObjectsPropertyModel(items, 'isPublic'));
+            imageProMgr.getEditor('isFriends').bindTo(new MultipleObjectsPropertyModel(items, 'isFriends'));
+            imageProMgr.getEditor('isFamily').bindTo(new MultipleObjectsPropertyModel(items, 'isFamily'));
         }
     }
     

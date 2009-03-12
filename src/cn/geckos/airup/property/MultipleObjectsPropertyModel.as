@@ -8,19 +8,19 @@ public class MultipleObjectsPropertyModel extends DefaultPropertyModeal
 {
     protected var _value:*;
     
-    public function MultipleObjectsPropertyModel(owner:Object, propertyName:String)
+    public function MultipleObjectsPropertyModel(owner:Object, propertyName:String, value:*=null)
     {
-        super(owner, propertyName);
+        super(owner, propertyName, value);
     }
 
-    override public function set value(value:*)
+    override public function set value(value:*):void
     {
         if( _value != value ) {
             _value = value
             
 	        for each( var obj:Object in owner )
 	        {
-	            owner[propertyName] = value;
+	            obj[propertyName] = value;
 	        }
         }
     }

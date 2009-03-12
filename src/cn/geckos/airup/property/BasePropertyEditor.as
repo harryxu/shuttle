@@ -5,16 +5,16 @@ import flash.events.Event;
 public class BasePropertyEditor implements IPropertyEditor
 {
     protected var model:IPropertyModel;
-    protected var display:DisplayObject;
+    protected var _display:Object;
     
     public function BasePropertyEditor(display:Object)
     {
-        this.display = display;
+        _display = display;
     }
     
     public function get display():Object
     {
-        return display;
+        return _display;
     }
         
     public function applyProperty():void

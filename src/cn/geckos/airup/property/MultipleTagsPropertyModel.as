@@ -13,19 +13,19 @@ public class MultipleTagsPropertyModel extends MultipleObjectsPropertyModel
     /**
      * 设置标签字符 类似  "flash flex java code"
      */
-    override public function set value(value:*):Object
+    override public function set value(value:*):void
     {
         var newTags:String = StringUtil.trim(String(value));
         
         if( newTags.length > 0 && newTags != _value ) {
             
             var newTagsGroup:Array = newTags.split(' ');
-            var oldTagsGroup:Array = String(_value).split(' ');
+            var oldTagsGroup:Array = String(_value||'').split(' ');
             
             for each( var tag:String in newTagsGroup )
             {
                 // 如果新标签不存在于现有标签中, 就要把新标签加进去
-                if( oldTagsGroup.indexOf(tag) > -1 ) {
+                if( oldTagsGroup.indexOf(tag) < 0 ) {
                     oldTagsGroup.push(tag);
                 }
             }

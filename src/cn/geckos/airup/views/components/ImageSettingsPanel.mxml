@@ -8,11 +8,32 @@
     <mx:TextInput id="tagsInput" width="100%"/>
     <mx:Label text="Who can see this photo?"/>
     
-    <mx:RadioButton id="privateRadio" label="Radio"/>
-    <mx:VBox id="cbbox" enabled="{privateRadio.selected}" paddingLeft="20">
-	    <mx:CheckBox label="Your Friends" id="friCheck"/>
-	    <mx:CheckBox label="Your Family" id="fmlCheck"/>
+    
+    <mx:RadioButtonGroup id="mainPrivacy" />
+    <mx:RadioButton id="privateRadio" 
+        label="Only You (Private)" 
+        value="{false}"
+        groupName="mainPrivacy"
+        />
+    <mx:VBox 
+        id="cbbox" 
+        enabled="{privateRadio.selected}" 
+        paddingLeft="20"
+        >
+	    <mx:CheckBox 
+	        label="Your Friends" 
+	        id="friCheck"
+	        />
+	    <mx:CheckBox 
+	        label="Your Family" 
+	        id="fmlCheck"
+	        />
     </mx:VBox>
-    <mx:RadioButton id="publicRadio" label="Radio" selected="true"/>
+    <mx:RadioButton id="publicRadio" 
+        label="Anyone (Public)" 
+        value="{true}"
+        selected="true"
+        groupName="mainPrivacy"
+        />
     
 </mx:VBox>
