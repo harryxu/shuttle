@@ -1,5 +1,7 @@
 package cn.geckos.airup.views
 {
+import __AS3__.vec.Vector;
+
 import cn.geckos.airup.Notices;
 import cn.geckos.airup.models.vo.ImageVO;
 import cn.geckos.airup.property.BooleanEditor;
@@ -12,8 +14,12 @@ import cn.geckos.airup.property.StringEditor;
 import cn.geckos.airup.views.components.ImageListBox;
 import cn.geckos.airup.views.components.ImageSettingsPanel;
 
+import flash.desktop.ClipboardFormats;
+import flash.desktop.NativeDragActions;
+import flash.desktop.NativeDragManager;
 import flash.events.FileListEvent;
 import flash.events.MouseEvent;
+import flash.events.NativeDragEvent;
 import flash.filesystem.File;
 import flash.net.FileFilter;
 
@@ -62,6 +68,9 @@ public class ImageListMediator extends Mediator
         component.uploadBtn.addEventListener(MenuEvent.ITEM_CLICK, uploadBtnClickHandler);
         component.removeBtn.addEventListener(MenuEvent.ITEM_CLICK, removeBtnClickHandler);
         component.list.addEventListener(ListEvent.CHANGE, listChangeHandler);
+        
+        component.list.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, dragEnterHandler);
+        component.list.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, dragDropHandler);
     }
     
     private function getFile():File
@@ -71,6 +80,25 @@ public class ImageListMediator extends Mediator
             _file.addEventListener(FileListEvent.SELECT_MULTIPLE, fileSelectMultipleHandler);
         }
         return _file;
+    }
+    
+    public function addFilesToList(files:Vector.<File>):void
+    {
+        for each( var file:File in files ) 
+        {
+            var fileExist:Boolean;
+            for each( var vo:ImageVO in component.listData )
+            {
+                if( file.nativePath == File(vo.file).nativePath ) {
+                    fileExist = true;
+                }
+            }
+            
+            if( !fileExist ) {
+                component.listData.addItem(new ImageVO(file));
+            }
+            
+        }
     }
     
     
@@ -87,23 +115,7 @@ public class ImageListMediator extends Mediator
      */
     private function fileSelectMultipleHandler(event:FileListEvent):void
     {
-        var files:Array = event.files;
-        
-        for each( var file:File in files ) 
-        {
-            var fileExist:Boolean;
-            for each( var vo:ImageVO in component.listData )
-            {
-                if( file.nativePath == File(vo.file).nativePath ) {
-                    fileExist = true;
-                }
-            }
-            
-            if( !fileExist ) {
-                component.listData.addItem(new ImageVO(file));
-            }
-            
-        }
+        addFilesToList(Vector.<File>(event.files));
     }
     
     /**
@@ -163,7 +175,7 @@ public class ImageListMediator extends Mediator
      */
     private function listChangeHandler(event:ListEvent):void
     {
-        // very dirty, to be refactory
+        //FIXME very dirty, to be refactory
         
         if( !imageProMgr ) {
             imageProMgr = new PropertyManager();
@@ -200,6 +212,28 @@ public class ImageListMediator extends Mediator
             imageProMgr.getEditor('isFamily').bindTo(new MultipleObjectsPropertyModel(items, 'isFamily'));
         }
     }
+    
+    //
+    // drag and drop event
+    //
+    
+    private function dragEnterHandler(event:NativeDragEvent):void
+    {
+        NativeDragManager.acceptDragDrop(component.list);
+    }
+    
+    private function dragDropHandler(event:NativeDragEvent):void
+    {
+        NativeDragManager.dropAction = NativeDragActions.COPY;
+        var files:Vector.<File> = 
+            Vector.<File>( event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) );
+        addFilesToList(files);
+    }
+    
+    
+    //
+    // puremvc functions 
+    //
     
     override public function listNotificationInterests():Array
     {
