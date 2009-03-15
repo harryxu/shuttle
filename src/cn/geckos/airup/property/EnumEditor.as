@@ -3,6 +3,8 @@ package cn.geckos.airup.property
 import flash.events.Event;
 
 import mx.controls.RadioButtonGroup;
+import mx.controls.listClasses.ListBase;
+import mx.core.UIComponent;
     
 public class EnumEditor extends BasePropertyEditor
 {
@@ -10,19 +12,26 @@ public class EnumEditor extends BasePropertyEditor
     {
         super(display);
         
-        RadioButtonGroup(display).addEventListener(Event.CHANGE, applyHandler);
+        UIComponent(display).addEventListener(Event.CHANGE, applyHandler);
     }
     
     override public function applyProperty():void
     {
-        model.value = RadioButtonGroup(display).selectedValue;
+        if( display is RadioButtonGroup ) {
+	        model.value = RadioButtonGroup(display).selectedValue;
+        }
+        else if( display is ListBase ) {
+            model.value = ListBase(display).selectedItem.value;
+        }
     }
     
     override public function bindTo(model:IPropertyModel):void
     {
         super.bindTo(model);
         
-        RadioButtonGroup(display).selectedValue = model.value;
+        if( display is RadioButtonGroup ) {
+	        RadioButtonGroup(display).selectedValue = model.value;
+        }
     }
         
 }
