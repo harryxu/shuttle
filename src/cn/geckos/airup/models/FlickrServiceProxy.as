@@ -147,16 +147,25 @@ public class FlickrServiceProxy extends Proxy
      * @param imageVO
      * 
      */
-    public function upload(imageVO:ImageVO):void
+    public function upload(vo:ImageVO):void
     {
         if( !uploader ) {
             uploader = new SequenceFileUploader();
         }
         
-        var request:URLRequest = getUploadRequest(service, imageVO.file);
+        var request:URLRequest = getUploadRequest(service, vo.file,
+                                    vo.title,
+                                    vo.description,
+                                    vo.tags,
+                                    vo.isPublic,
+                                    vo.ifFriends,
+                                    vo.isFamily,
+                                    vo.safety,
+                                    vo.content,
+                                    vo.hidden);
         
-        imageVO.wait();
-        uploader.addFile(imageVO.file, request, 'photo');
+        vo.wait();
+        uploader.addFile(vo.file, request, 'photo');
         
         if( !uploader.running ) {
             uploader.start();

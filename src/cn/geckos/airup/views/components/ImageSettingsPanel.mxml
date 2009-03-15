@@ -1,39 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml">
-    <mx:Label text="Title"/>
-    <mx:TextInput id="titleInput" width="100%"/>
-    <mx:Label text="Description"/>
-    <mx:TextArea height="100" id="descInput" width="100%"/>
-    <mx:Label text="Tags"/>
-    <mx:TextInput id="tagsInput" width="100%"/>
-    <mx:Label text="Who can see this photo?"/>
-    
-    
-    <mx:RadioButtonGroup id="mainPrivacy" />
-    <mx:RadioButton id="privateRadio" 
-        label="Only You (Private)" 
-        value="{false}"
-        groupName="mainPrivacy"
-        />
-    <mx:VBox 
-        id="cbbox" 
-        enabled="{privateRadio.selected}" 
-        paddingLeft="20"
-        >
-	    <mx:CheckBox 
-	        label="Your Friends" 
-	        id="friCheck"
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:VBox>
+	    <mx:Label text="Title"/>
+	    <mx:TextInput id="titleInput" width="100%"/>
+	    <mx:Label text="Description"/>
+	    <mx:TextArea height="100" id="descInput" width="100%"/>
+	    <mx:Label text="Tags"/>
+	    <mx:TextInput id="tagsInput" width="100%"/>
+	    <mx:Label text="Who can see this photo?"/>
+	    
+	    
+	    <mx:RadioButtonGroup id="mainPrivacy" />
+	    <mx:RadioButton id="privateRadio" 
+	        label="Only You (Private)" 
+	        value="{false}"
+	        groupName="mainPrivacy"
 	        />
-	    <mx:CheckBox 
-	        label="Your Family" 
-	        id="fmlCheck"
+	    <mx:VBox 
+	        id="cbbox" 
+	        enabled="{privateRadio.selected}" 
+	        paddingLeft="20"
+	        >
+		    <mx:CheckBox 
+		        label="Your Friends" 
+		        id="friCheck"
+		        />
+		    <mx:CheckBox 
+		        label="Your Family" 
+		        id="fmlCheck"
+		        />
+	    </mx:VBox>
+	    <mx:RadioButton id="publicRadio" 
+	        label="Anyone (Public)" 
+	        value="{true}"
+	        selected="true"
+	        groupName="mainPrivacy"
 	        />
-    </mx:VBox>
-    <mx:RadioButton id="publicRadio" 
-        label="Anyone (Public)" 
-        value="{true}"
-        selected="true"
-        groupName="mainPrivacy"
-        />
+	    
+	</mx:VBox>
+	
+	<mx:VBox>
+	    <mx:Label text="Safety level:" />
+	    <mx:ComboBox id="safetyCombo"
+	        dataProvider="{[
+	           {label:'Safe',      value:1},
+	           {label:'Moderate',  value:2},
+	           {label:'Restricted',value:3} ]}"
+	        selectedIndex="0"
+	           />
+	    
+	    <mx:Label text="Hide from public site areas?" />
+	    <mx:ComboBox id="hiddenCombo" 
+	        dataProvider="{[
+	           {label:'No',  value:1},
+	           {label:'Yes', value:2} ]}"
+	        selectedIndex="0"
+	        />
+	    
+	    <mx:Label text="Content type:" />
+	    <mx:ComboBox id="contentCombo"
+	        dataProvider="{[
+	           {label:'Photo',     value:1},
+	           {label:'ScreenCast',value:2},
+	           {label:'Other',     value:3} ]}"
+	        selectedIndex="0"
+	        />
+	</mx:VBox>
+	
     
-</mx:VBox>
+</mx:HBox>

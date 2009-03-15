@@ -15,7 +15,6 @@ public class MultipleTagsPropertyModel extends MultipleObjectsPropertyModel
      */
     override public function set value(value:*):void
     {
-        
         if( _value == value ) {
             return;
         }
@@ -38,7 +37,7 @@ public class MultipleTagsPropertyModel extends MultipleObjectsPropertyModel
 	                }
 	            }
 	            
-	            obj[propertyName] = oldTagsGroup.join(' ');
+	            obj[propertyName] = StringUtil.trim( oldTagsGroup.join(' ') );
 	        }
         }
         
