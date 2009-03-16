@@ -1,10 +1,10 @@
 package cn.geckos.airup.property
 {
 import flash.events.Event;
+import flash.events.EventDispatcher;
 
+import mx.controls.ComboBase;
 import mx.controls.RadioButtonGroup;
-import mx.controls.listClasses.ListBase;
-import mx.core.UIComponent;
     
 public class EnumEditor extends BasePropertyEditor
 {
@@ -12,7 +12,9 @@ public class EnumEditor extends BasePropertyEditor
     {
         super(display);
         
-        UIComponent(display).addEventListener(Event.CHANGE, applyHandler);
+        if( display is EventDispatcher ) {
+	        display.addEventListener(Event.CHANGE, applyHandler);
+        }
     }
     
     override public function applyProperty():void
@@ -20,8 +22,8 @@ public class EnumEditor extends BasePropertyEditor
         if( display is RadioButtonGroup ) {
 	        model.value = RadioButtonGroup(display).selectedValue;
         }
-        else if( display is ListBase ) {
-            model.value = ListBase(display).selectedItem.value;
+        else if( display is ComboBase ) {
+            model.value = ComboBase(display).selectedItem.value;
         }
     }
     
@@ -31,6 +33,17 @@ public class EnumEditor extends BasePropertyEditor
         
         if( display is RadioButtonGroup ) {
 	        RadioButtonGroup(display).selectedValue = model.value;
+        }
+        else if( display is ComboBase ) {
+            var combo:ComboBase = ComboBase(display);
+            var dp:Object = combo.dataProvider;
+            for each( var data:Object in dp ) 
+            {
+                if( data.value == model.value ) {
+                    combo.selectedItem = data;
+                    return;
+                }
+            }
         }
     }
         
