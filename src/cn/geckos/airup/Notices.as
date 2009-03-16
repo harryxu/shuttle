@@ -22,6 +22,16 @@ public class Notices
     public static const ADD_ACCOUNT:String = 'addAccount';
     
     //
+    //  Abstract Request and Response Notices for web service.
+    //
+    
+    /**
+     * Quota infomation, space, upload quota ... 
+     */    
+    public static const GET_QUOTA:String        = 'getQuota';
+    public static const GET_QUOTA_SUCESS:String = 'getQuotaSuccess';
+    
+    //
     //  Flickr 服务相关
     //
     

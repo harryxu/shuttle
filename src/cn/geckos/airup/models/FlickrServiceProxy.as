@@ -143,6 +143,22 @@ public class FlickrServiceProxy extends Proxy
     }
     
     /**
+     * 获取上传状态（配额等。。）
+     * 
+     */
+    public function getUploadStatus():void
+    {
+        service.people.getUploadStatus();
+    }    
+    
+    public function getUploadStatusHandler(event:FlickrResultEvent):void
+    {
+        
+    }
+    
+    
+    
+    /**
      * 
      * @param imageVO
      * 
