@@ -51,12 +51,18 @@ public class ProfileMediator extends Mediator
             Notices.GET_FLICKR_AUTH_TOKEN_SUCCESS,
             Notices.CHECK_FLICKR_TOKEN_OK,
             Notices.GET_FLICKR_USER_INFO_SUCCESS,
+            Notices.GET_QUOTA_SUCESS,
         ];
     }
     
     override public function handleNotification(notification:INotification):void
     {
         var data:Object = notification.getBody();
+        
+        var user:User;
+        if( data is User ) {
+            user = User(data);
+        }
         
         switch( notification.getName() )
         {
@@ -96,11 +102,18 @@ public class ProfileMediator extends Mediator
 	           sendNotification(Notices.GET_FLICKR_USER_INFO, authResult.user.nsid);
 	           break;
 	           
+	        //   
+	        // user info   
+	        //
 	        case Notices.GET_FLICKR_USER_INFO_SUCCESS:
-	           var userInfo:User = User(data);
-	           component.avatar.source = 'http://farm' + userInfo.iconFarm
-	               + '.static.flickr.com/' + userInfo.iconServer + '/buddyicons/' 
-	               + userInfo.nsid + '.jpg';
+	           component.avatar.source = 'http://farm' + user.iconFarm
+	               + '.static.flickr.com/' + user.iconServer + '/buddyicons/' 
+	               + user.nsid + '.jpg';
+	           break;
+	           
+	        case Notices.GET_QUOTA_SUCESS:
+	           component.bytesUsed = user.bandwidthUsed;
+	           component.bytesMax = user.bandwidthMax;
 	           break;
         } 
     }

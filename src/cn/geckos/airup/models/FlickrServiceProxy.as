@@ -37,12 +37,11 @@ public class FlickrServiceProxy extends Proxy
         service.addEventListener(FlickrResultEvent.AUTH_GET_TOKEN, getTokenHandler, false, 0, true);
         service.addEventListener(FlickrResultEvent.AUTH_CHECK_TOKEN, checkTokenltHandler, false, 0, true);
         service.addEventListener(FlickrResultEvent.PEOPLE_GET_INFO, getInfoHandler, false, 0, true);
+        service.addEventListener(FlickrResultEvent.PEOPLE_GET_UPLOAD_STATUS, getUploadStatusHandler, false, 0, true);
     }
-    
-    
 	
 	/**
-	 * 
+	 * 验证用户
 	 * @param id
 	 * 
 	 */
@@ -153,7 +152,7 @@ public class FlickrServiceProxy extends Proxy
     
     public function getUploadStatusHandler(event:FlickrResultEvent):void
     {
-        
+        sendNotification(Notices.GET_QUOTA_SUCESS, event.data.user);
     }
     
     

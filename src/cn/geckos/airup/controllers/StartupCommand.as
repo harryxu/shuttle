@@ -30,7 +30,7 @@ public class StartupCommand extends SimpleCommand
         // flickr commands
         facade.registerCommand(Notices.GET_FLICKR_AUTH_FROB, GetFlickrAuthFrobCommand);
         facade.registerCommand(Notices.GET_FLICKR_AUTH_TOKEN, GetFlickrAuthTokenCommand);
-        facade.registerCommand(Notices.GET_FLICKR_USER_INFO, GetFlickrUserInfoCommand);
+        facade.registerCommand(Notices.GET_FLICKR_USER_INFO, GetServiceAccountInfoCommand);
         facade.registerCommand(Notices.UPLOAD, FlickUploadCommand);
         
         // register proxies

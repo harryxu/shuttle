@@ -5,12 +5,16 @@ import cn.geckos.airup.models.FlickrServiceProxy;
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.command.SimpleCommand;
 
-public class GetFlickrUserInfoCommand extends SimpleCommand
+public class GetServiceAccountInfoCommand extends SimpleCommand
 {
     override public function execute(notification:INotification):void
     {
         var id:String = notification.getBody().toString();
-        FlickrServiceProxy(facade.retrieveProxy(FlickrServiceProxy.NAME)).getUserInfo(id);
+        var proxy:FlickrServiceProxy = 
+            FlickrServiceProxy(facade.retrieveProxy(FlickrServiceProxy.NAME))
+            
+        proxy.getUserInfo(id);
+        proxy.getUploadStatus();
     }
 }
 }

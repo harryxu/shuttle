@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+
+    <mx:Script>
+        <![CDATA[
+            import cn.geckos.crazyas.utils.SizeFormat;
+            
+            [Bindable]
+            public var bytesMax:Number;
+            
+            [Bindable]
+            public var bytesUsed:Number;
+            
+        ]]>
+    </mx:Script>
+
     <mx:Image id="avatar"/>
-    <mx:Label id="nameLabel"/>
+    <mx:VBox verticalGap="0">
+	    <mx:Label id="nameLabel"/>
+	    <mx:Label id="quotaLabel" 
+	        text="{SizeFormat.humanRead(bytesUsed)}/{SizeFormat.humanRead(bytesMax)}"
+	        />
+    </mx:VBox>
     
     
     <mx:Button id="signBtn" label="signin" visible="false"/>
