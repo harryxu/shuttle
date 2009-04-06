@@ -18,7 +18,7 @@ public class AuthDefaultAccountCommand extends SimpleCommand
         }
         else {
             var proxy:FlickrServiceProxy = facade.retrieveProxy(FlickrServiceProxy.NAME) as FlickrServiceProxy;
-            proxy.auth(account.id.toString());
+            proxy.auth(account.@id.toString());
         }
         
     }

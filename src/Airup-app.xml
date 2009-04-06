@@ -61,7 +61,7 @@
 		<!-- <resizable></resizable> -->
 
 		<!-- The window's initial width. Optional. -->
-		<width>700</width>
+		<width>800</width>
 
 		<!-- The window's initial height. Optional. -->
 		<height>600</height>

@@ -31,6 +31,11 @@ public class ProfileMediator extends Mediator
     private var _authTokenPanel:FlickrAuthTokenPanel;
     
     /**
+     * 当前登录的用户 
+     */    
+    protected var currentUser:Object = {};
+    
+    /**
      * 
      * @param mediatorName
      * @param viewComponent
@@ -41,6 +46,8 @@ public class ProfileMediator extends Mediator
         super(mediatorName, viewComponent);
         
         component.signBtn.addEventListener(MouseEvent.CLICK, signBtnClickHandler);
+        
+        component.addEventListener('deleteAccount', deleteAccountHandler);
     }
     
     override public function listNotificationInterests():Array
@@ -87,18 +94,26 @@ public class ProfileMediator extends Mediator
 	        case Notices.GET_FLICKR_AUTH_TOKEN_SUCCESS:
 	           PopUpManager.removePopUp(_authTokenPanel);
 	           
-	           component.signBtn.visible = false;
 	           
 	           // 通知将账户保存到本地配置文件中
 	           sendNotification(Notices.ADD_ACCOUNT, {
 	                    'id': AuthResult(data).user.username,
 	               'service': 'flickr'
 	           });
+	           
+	        // auth token 验证成功
 	        case Notices.CHECK_FLICKR_TOKEN_OK:
 	           trace('auth token ok');
 	           
 	           var authResult:AuthResult = AuthResult(data);
+	           
+	           currentUser['id'] = authResult.user.username;
+	           currentUser['service'] = 'flickr';
+	           
 	           component.nameLabel.text = authResult.user.username;
+	           component.logined = true;
+	           
+	           // 通知获取用户信息
 	           sendNotification(Notices.GET_FLICKR_USER_INFO, authResult.user.nsid);
 	           break;
 	           
@@ -129,6 +144,14 @@ public class ProfileMediator extends Mediator
     {
         _authTokenPanel.completeBtn.enabled = false;
         sendNotification(Notices.GET_FLICKR_AUTH_TOKEN);
+    }
+    
+    private function deleteAccountHandler(event:Event):void
+    {
+        sendNotification(Notices.DELETE_ACCOUNT, currentUser);
+        trace('delete', currentUser.id, currentUser.service);
+        component.signBtn.enabled = true;
+        component.logined = false;
     }
         
 }

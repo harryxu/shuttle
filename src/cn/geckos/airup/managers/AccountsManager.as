@@ -63,18 +63,9 @@ public class AccountsManager
                 setDefaultAccount(id, service, false);
             }
             
-            var accountNode:XMLNode = new XMLNode(XMLNodeType.ELEMENT_NODE, 'account');
-            
-            var idNode:XMLNode = new XMLNode(XMLNodeType.ELEMENT_NODE, 'id'); 
-            idNode.appendChild(new XMLNode(XMLNodeType.TEXT_NODE, id));
-            
-            var serviceNode:XMLNode = new XMLNode(XMLNodeType.ELEMENT_NODE, 'service');
-            serviceNode.appendChild(new XMLNode(XMLNodeType.TEXT_NODE, service));
-            
-            accountNode.appendChild(idNode);
-            accountNode.appendChild(serviceNode);
-            
-            getAccountsContent().appendChild( new XML(accountNode) );
+            getAccountsContent().appendChild(
+                    new XML("<account id='"+id+"' service='"+service+"' />")
+                );
             
             // 保存到文件
             saveAccountsContent();
@@ -94,8 +85,9 @@ public class AccountsManager
      */
     public function getAccount(id:String, service:String='flickr'):XML
     {
-        var account:XMLList = getAccountsContent().account.(id==id && service==service);
-        if( account.toString() == '' ) {
+        var account:XMLList = getAccountsContent().account.(@id==id && @service==service);
+        if (!account || account.length() < 1) 
+        {
             return null;
         }
         
@@ -144,10 +136,19 @@ public class AccountsManager
      * @return 
      * 
      */
-    // TODO
     public function deleteAccount(id:String, service:String='flickr'):Boolean
     {
-        return false;
+        var content:XML = getAccountsContent();
+        
+        // 如果要删除的账户是默认账户，就删除默认账户
+        if (id == getDefaultAccount().@id && service == getDefaultAccount().@service)
+        {
+            delete content.defaultAccount;
+        }
+        
+        delete content.account.(@id==id && @service==service)[0];
+        
+        return saveAccountsContent();
     }
     
     /**

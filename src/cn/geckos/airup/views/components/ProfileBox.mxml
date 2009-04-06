@@ -3,6 +3,8 @@
 
     <mx:Script>
         <![CDATA[
+            import mx.events.CloseEvent;
+            import mx.controls.Alert;
             import cn.geckos.crazyas.utils.SizeFormat;
             
             [Bindable]
@@ -11,17 +13,46 @@
             [Bindable]
             public var bytesUsed:Number;
             
+            [Bindable]
+            public var logined:Boolean;
+            
+            protected function popupDeleteAccount():void
+            {
+                var alert:Alert = Alert.show('确认删除当前帐号么？', 
+                                            '', 
+                                            Alert.YES|Alert.NO,
+                                            null,
+                                            alertCloseHandler);
+                                            
+            }
+            
+            protected function alertCloseHandler(event:CloseEvent):void
+            {
+                if (event.detail == Alert.YES)
+                {
+                    dispatchEvent(new Event('deleteAccount'));
+                }
+            }
+            
         ]]>
     </mx:Script>
 
-    <mx:Image id="avatar"/>
-    <mx:VBox verticalGap="0">
+    <mx:Image id="avatar" visible="{logined}"/>
+    <mx:VBox verticalGap="0" visible="{logined}">
 	    <mx:Label id="nameLabel"/>
 	    <mx:Label id="quotaLabel" 
 	        text="{SizeFormat.humanRead(bytesUsed)}/{SizeFormat.humanRead(bytesMax)}"
 	        />
     </mx:VBox>
     
-    
-    <mx:Button id="signBtn" label="signin" visible="false"/>
+    <mx:Button id="signBtn"
+        label="Login" 
+        visible="{!logined}" 
+        />
+        
+    <mx:Button label="Logout" 
+        visible="{logined}"
+        click="popupDeleteAccount();"
+        />
+        
 </mx:HBox>

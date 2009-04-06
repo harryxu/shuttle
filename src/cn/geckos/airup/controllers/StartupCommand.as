@@ -23,9 +23,9 @@ public class StartupCommand extends SimpleCommand
         facade.registerMediator( new ImageListMediator(ImageListMediator.NAME, app.imageList) );
         
         // register commands
-        
         facade.registerCommand(Notices.AUTH_DEFAULT_ACCOUNT, AuthDefaultAccountCommand);
         facade.registerCommand(Notices.ADD_ACCOUNT, AddAccountCommand);
+        facade.registerCommand(Notices.DELETE_ACCOUNT, DeleteAccountCommand);
         
         // flickr commands
         facade.registerCommand(Notices.GET_FLICKR_AUTH_FROB, GetFlickrAuthFrobCommand);

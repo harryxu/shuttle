@@ -2,8 +2,9 @@
 <mx:Panel 
     xmlns:mx="http://www.adobe.com/2006/mxml" 
     layout="vertical"
-    width="300" 
-    horizontalAlign="center">
+    width="500" 
+    horizontalAlign="center"
+    creationComplete="init();">
     
     <mx:Script>
         <![CDATA[
@@ -13,14 +14,36 @@
             [Bindable]
             public var loginURL:String;
             
+            [Bindable]
+            private var t:Number = 5;
+            
+            private function init():void
+            {
+                var timer:Timer = new Timer(1000, 5);
+                timer.addEventListener(TimerEvent.TIMER, timerHandler);
+                timer.addEventListener(TimerEvent.TIMER_COMPLETE, timerCompleteHandler);
+                timer.start();
+            }
+            
+            private function timerHandler(event:TimerEvent):void
+            {
+                t--;
+            }
+            
+            private function timerCompleteHandler(event:TimerEvent):void
+            {
+                completeBtn.enabled = true;
+                completeBtn.label = 'Complete';
+            }
+            
         ]]>
     </mx:Script>
     
-    <mx:Text text="Please open this url and auth."/>
+    <mx:Text text="{'请在浏览器中打开下面的网址并点击网页中的允许按钮，\n然后返回到本程序点击完成按钮。'}"/>
     <mx:TextInput text="{loginURL}" width="100%" editable="false"/>
-    <mx:Button 
+    <mx:Button enabled="false"
         id="completeBtn" 
-        label="Complete"
+        label="Complete({t})"
         click="dispatchEvent(new Event(GET_TOKEN))" 
         />
     

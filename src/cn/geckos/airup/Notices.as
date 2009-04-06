@@ -19,7 +19,12 @@ public class Notices
     /**
      * 添加账户
      */
-    public static const ADD_ACCOUNT:String = 'addAccount';
+    public static const ADD_ACCOUNT:String =    'addAccount';
+    
+    /**
+     * 删除一个本地帐户
+     */
+    public static const DELETE_ACCOUNT:String = 'delteAccout';
     
     //
     //  Abstract Request and Response Notices for web service.

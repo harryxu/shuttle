@@ -19,6 +19,8 @@
         ]]>
     </mx:Script>
     
+    <mx:Style source="assets/styles/default.css" />
+    
     <gks:ProfileBox id="profileBox" width="100%" height="50" />
     
     <gks:ImageListBox id="imageList" width="100%" height="100%" enabled="false" />
