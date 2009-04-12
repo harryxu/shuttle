@@ -1,0 +1,26 @@
+编译该项目所需的第三方代码库
+
+    as3corelib 
+    http://code.google.com/p/as3corelib/
+--------------------------------------------------------------------------------
+    
+    as3flickrlib
+    http://code.google.com/p/as3flickrlib/
+         提供flickr的api调用与解析
+--------------------------------------------------------------------------------
+         
+    PureMVC Standard for AS3
+    http://trac.puremvc.org/PureMVC_AS3
+    MVC框架
+ -------------------------------------------------------------------------------
+    
+    crazyAS
+    http://github.com/harryxu/crazyas/tree/master
+    geckos自己写的一些实用代码
+ -------------------------------------------------------------------------------
+
+    Flex Unit
+    http://opensource.adobe.com/wiki/display/flexunit/FlexUnit
+         单元测试    
+ -------------------------------------------------------------------------------
+         

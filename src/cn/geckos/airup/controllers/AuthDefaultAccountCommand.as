@@ -13,10 +13,13 @@ public class AuthDefaultAccountCommand extends SimpleCommand
     {
         var account:XML = AccountsManager.getInstance().getDefaultAccount();
         
-        if( !account ) {
+        if( !account )
+        {
             sendNotification(Notices.NO_DEFAULT_ACCOUNT);
         }
-        else {
+        else 
+        {
+            sendNotification(Notices.BEFORE_AUTH);
             var proxy:FlickrServiceProxy = facade.retrieveProxy(FlickrServiceProxy.NAME) as FlickrServiceProxy;
             proxy.auth(account.@id.toString());
         }

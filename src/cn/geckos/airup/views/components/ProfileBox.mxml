@@ -14,15 +14,21 @@
             public var bytesUsed:Number;
             
             [Bindable]
-            public var logined:Boolean;
+           /**
+            * 0 => not loged in
+            * 1 => loged in
+            * 2 => loading
+            */ 
+            public var status:int = 0;
+            
             
             protected function popupDeleteAccount():void
             {
                 var alert:Alert = Alert.show('确认删除当前帐号么？', 
-                                            '', 
-                                            Alert.YES|Alert.NO,
-                                            null,
-                                            alertCloseHandler);
+                                              '', 
+                                              Alert.YES|Alert.NO,
+                                              null,
+                                              alertCloseHandler);
                                             
             }
             
@@ -37,22 +43,18 @@
         ]]>
     </mx:Script>
 
-    <mx:Image id="avatar" visible="{logined}"/>
-    <mx:VBox verticalGap="0" visible="{logined}">
+    <mx:Image id="avatar" visible="{status == 1}"/>
+    <mx:VBox verticalGap="0" visible="{status == 1}">
 	    <mx:Label id="nameLabel"/>
 	    <mx:Label id="quotaLabel" 
 	        text="{SizeFormat.humanRead(bytesUsed)}/{SizeFormat.humanRead(bytesMax)}"
 	        />
     </mx:VBox>
     
-    <mx:Button id="signBtn"
-        label="Login" 
-        visible="{!logined}" 
-        />
-        
-    <mx:Button label="Logout" 
-        visible="{logined}"
-        click="popupDeleteAccount();"
-        />
+    <mx:ViewStack selectedIndex="{status}" width="100%">
+        <mx:Box><mx:Button id="signBtn" label="Login" /></mx:Box>
+        <mx:Box><mx:Button label="Logout" click="popupDeleteAccount();" /></mx:Box>
+        <mx:Box><mx:Label text="loading" /></mx:Box>
+    </mx:ViewStack>
         
 </mx:HBox>

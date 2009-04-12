@@ -54,6 +54,7 @@ public class ProfileMediator extends Mediator
     {
         return [
             Notices.NO_DEFAULT_ACCOUNT,
+            Notices.BEFORE_AUTH,
             Notices.GET_FLICKR_AUTH_FROB_SUCCESS,
             Notices.GET_FLICKR_AUTH_TOKEN_SUCCESS,
             Notices.CHECK_FLICKR_TOKEN_OK,
@@ -77,6 +78,10 @@ public class ProfileMediator extends Mediator
                 component.signBtn.visible = true;
 	            break;
 	        
+	        case Notices.BEFORE_AUTH:
+	           component.status = 2;
+	           break;
+	        
 	        // 得到 auth frob
 	        case Notices.GET_FLICKR_AUTH_FROB_SUCCESS:
 	           var loginURL:String = data['loginURL'];
@@ -97,7 +102,7 @@ public class ProfileMediator extends Mediator
 	           
 	           // 通知将账户保存到本地配置文件中
 	           sendNotification(Notices.ADD_ACCOUNT, {
-	                    'id': AuthResult(data).user.username,
+	                     'id': AuthResult(data).user.username,
 	               'service': 'flickr'
 	           });
 	           
@@ -111,7 +116,7 @@ public class ProfileMediator extends Mediator
 	           currentUser['service'] = 'flickr';
 	           
 	           component.nameLabel.text = authResult.user.username;
-	           component.logined = true;
+	           component.status = 1;
 	           
 	           // 通知获取用户信息
 	           sendNotification(Notices.GET_FLICKR_USER_INFO, authResult.user.nsid);
@@ -130,7 +135,7 @@ public class ProfileMediator extends Mediator
 	           component.bytesUsed = user.bandwidthUsed;
 	           component.bytesMax = user.bandwidthMax;
 	           break;
-        } 
+        }
     }
     
     
@@ -151,7 +156,7 @@ public class ProfileMediator extends Mediator
         sendNotification(Notices.DELETE_ACCOUNT, currentUser);
         trace('delete', currentUser.id, currentUser.service);
         component.signBtn.enabled = true;
-        component.logined = false;
+        component.status = 0;
     }
         
 }

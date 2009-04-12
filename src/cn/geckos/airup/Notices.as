@@ -26,6 +26,11 @@ public class Notices
      */
     public static const DELETE_ACCOUNT:String = 'delteAccout';
     
+    
+    /**
+     * 调用 ServiceProxy.auth 之前通知。 
+     */
+    public static const BEFORE_AUTH:String = 'beforeAuth';
     //
     //  Abstract Request and Response Notices for web service.
     //

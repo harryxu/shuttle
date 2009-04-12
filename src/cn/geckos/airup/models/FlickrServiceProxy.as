@@ -48,11 +48,12 @@ public class FlickrServiceProxy extends Proxy
 	public function auth(accountId:String):void
 	{
 	    var token:ByteArray = EncryptedLocalStore.getItem('flickr_' + accountId);
-	    
-	    if( token ) {
+	    if (token)
+	    {
 	        checkToken( token.readUTFBytes(token.length) );
 	    }
-	    else {
+	    else
+	    {
 	        getFrob();
 	    }
 	}
