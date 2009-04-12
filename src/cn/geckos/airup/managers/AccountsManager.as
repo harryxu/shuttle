@@ -5,8 +5,6 @@ import cn.geckos.airup.Version;
 import flash.filesystem.File;
 import flash.filesystem.FileMode;
 import flash.filesystem.FileStream;
-import flash.xml.XMLNode;
-import flash.xml.XMLNodeType;
     
 public class AccountsManager
 {
@@ -56,16 +54,16 @@ public class AccountsManager
     // TODO 加一个 Account 类
     public function addAccount(id:String, service:String='flickr'):Boolean
     {
-        if( !getAccount(id, service) ) {
+        if (!getAccount(id, service)) 
+        {
+            getAccountsContent().appendChild(
+                new XML("<account id='"+id+"' service='"+service+"' />"));
             
             // 如果目前没有任何账户，就将此账户设成默认账户
-            if( XMLList(getAccountsContent().account).length() < 1 ) {
+            if(XMLList(getAccountsContent().account).length() == 1) 
+            {
                 setDefaultAccount(id, service, false);
             }
-            
-            getAccountsContent().appendChild(
-                    new XML("<account id='"+id+"' service='"+service+"' />")
-                );
             
             // 保存到文件
             saveAccountsContent();
@@ -74,6 +72,33 @@ public class AccountsManager
         }
         
         return false;
+    }
+    
+    /**
+     * 设置默认的使用账户
+     * @param id
+     * @param service
+     * @param save
+     * 
+     */
+    public function setDefaultAccount(id:String, service:String, save:Boolean=true):void
+    {
+        if(getDefaultAccount())
+        {
+            delete getDefaultAccount().@isDefault;
+        }
+        
+        var account:XML = getAccount(id, service);
+        
+        if (account)
+        {
+            account.@isDefault = 'true';
+        }
+        
+        if (save)
+        {
+            saveAccountsContent();
+        }
     }
     
     /**
@@ -94,24 +119,7 @@ public class AccountsManager
         return XML(account[0]);
     }
     
-    /**
-     * 设置默认的使用账户
-     * @param id
-     * @param service
-     * @param save
-     * 
-     */
-    public function setDefaultAccount(id:String, service:String, save:Boolean=true):void
-    {
-        var accounts:XML = getAccountsContent();
-        
-        accounts.defaultAccount.@id = id;
-        accounts.defaultAccount.@service = service;
-        
-        if( save ) {
-            saveAccountsContent();
-        }
-    }
+    
     
     /**
      * 
@@ -120,13 +128,29 @@ public class AccountsManager
      */
     public function getDefaultAccount():XML
     {
-        var account:XMLList = getAccountsContent().defaultAccount;
+        var accounts:XMLList = getAccountsContent().account;
         
-        if( account.length() < 1 ) {
+        if (accounts.length() < 1)
+        {
             return null;
         }
         
-        return getAccount(account[0].@id, account.@service);
+        try
+        {
+            var account:XMLList = accounts.(@isDefault=='true');
+        }
+        catch (error:Error)
+        {
+            trace('no default account');
+            return null;
+        }
+        
+        if(!account || account.length() < 1 ) 
+        {
+            return null;
+        }
+        
+        return account[0];
     }
     
     /**
@@ -190,7 +214,8 @@ public class AccountsManager
      */
     private function createAccountsFile(content:XML=null):Boolean
     {
-        if( !content ) {
+        if (!content) 
+        {
 	        content = 
 	        <airup>
 	            <version/>

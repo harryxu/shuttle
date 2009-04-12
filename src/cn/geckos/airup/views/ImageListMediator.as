@@ -224,10 +224,17 @@ public class ImageListMediator extends Mediator
     
     private function dragDropHandler(event:NativeDragEvent):void
     {
-        NativeDragManager.dropAction = NativeDragActions.COPY;
-        var files:Vector.<File> = 
-            Vector.<File>( event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) );
-        addFilesToList(files);
+        try
+        {
+            NativeDragManager.dropAction = NativeDragActions.COPY;
+            var files:Vector.<File> = 
+                Vector.<File>( event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) );
+            addFilesToList(files);
+        }
+        catch(error:Error)
+        {
+            // do nothing yet
+        }
     }
     
     

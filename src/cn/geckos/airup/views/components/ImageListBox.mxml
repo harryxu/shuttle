@@ -53,9 +53,6 @@
             rowHeight="150"
             columnWidth="150"
             allowMultipleSelection="true"
-            allowDragSelection="true"
-            dragMoveEnabled="true"
-            dragEnabled="true"
             />
          
          <gks:ImageSettingsPanel id="settingsPanel"
