@@ -2,11 +2,11 @@
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
 	<mx:VBox>
 	    <mx:Label text="Title"/>
-	    <mx:TextInput id="titleInput" width="100%"/>
+	    <mx:TextInput id="titleInput" width="160"/>
 	    <mx:Label text="Description"/>
-	    <mx:TextArea height="100" id="descInput" width="100%"/>
+	    <mx:TextArea height="100" id="descInput" width="160"/>
 	    <mx:Label text="Tags"/>
-	    <mx:TextInput id="tagsInput" width="100%"/>
+	    <mx:TextInput id="tagsInput" width="160"/>
 	    <mx:Label text="Who can see this photo?"/>
 	    
 	    

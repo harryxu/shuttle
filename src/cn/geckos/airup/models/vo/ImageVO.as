@@ -29,6 +29,7 @@ dynamic public class ImageVO extends EventDispatcher
     public function ImageVO(file:FileReference)
     {
         this.file = file;
+        this.title = file.name;
         
         file.addEventListener(Event.COMPLETE, completeHandler);
         file.addEventListener(Event.OPEN, openHandler);

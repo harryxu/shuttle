@@ -57,6 +57,7 @@
          
          <gks:ImageSettingsPanel id="settingsPanel"
              height="100%"
+             width="350"
              enabled="{list.selectedItems.length>0}" 
              />
              

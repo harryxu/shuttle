@@ -1,6 +1,9 @@
 /bin-debug
 
 .*
+!.actionScriptProperties
+!.flexProperties
+!.project
 !.gitignore
 
 *.air
