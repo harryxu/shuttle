@@ -11,7 +11,7 @@
         ]]>
     </mx:Script>
     
-    <mx:Image source="{File(data.file).nativePath}" 
+    <mx:Image source="{File(data.file).url}" 
         horizontalAlign="center" 
         verticalAlign="middle"
         filters="{[new DropShadowFilter(3, 45, 0, .3, 5, 5)]}"
