@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication
+    backgroundColor="#FFFFFF"
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    layout="vertical" 
+    xmlns:gks="cn.geckos.shuttle.views.components.*"
+    creationComplete="init();">
+    
+	<mx:Style source="assets/styles/kingnarestyle.css" />
+	<mx:Style source="assets/styles/default.css" />
+    
+    <mx:Script>
+        <![CDATA[
+            import cn.geckos.shuttle.AirupFacade;
+            
+            private function init():void
+            {
+                AirupFacade.getInstance().startup(this);
+            }
+            
+            
+        ]]>
+    </mx:Script>
+    
+    
+    <gks:ProfileBox id="profileBox" width="100%" height="50" />
+    
+    <gks:ImageListBox id="imageList" width="100%" height="100%" enabled="false" />
+	
+</mx:WindowedApplication>

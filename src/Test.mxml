@@ -6,7 +6,7 @@
     
     <mx:Script>
         <![CDATA[
-            import cn.geckos.airup.managers.AccountsManager;
+            import cn.geckos.shuttle.managers.AccountsManager;
             
             public function init():void
             {

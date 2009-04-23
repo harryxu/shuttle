@@ -1,7 +1,7 @@
 package cn.geckos.airuptests.model
 {
-import cn.geckos.airup.Notices;
-import cn.geckos.airup.models.FlickrServiceProxy;
+import cn.geckos.shuttle.Notices;
+import cn.geckos.shuttle.models.FlickrServiceProxy;
 import cn.geckos.airuptests.ApplicationFacade;
 
 import com.andculture.puremvcflexunittesting.PureMVCNotificationEvent;

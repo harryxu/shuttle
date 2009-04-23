@@ -1,7 +1,7 @@
 package cn.geckos.airuptests.controller {
 	
-	import cn.geckos.airup.flickr.Developer;
-	import cn.geckos.airup.models.FlickrServiceProxy;
+	import cn.geckos.shuttle.flickr.Developer;
+	import cn.geckos.shuttle.models.FlickrServiceProxy;
 	
 	import com.adobe.webapis.flickr.FlickrService;
 	

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box 
+    xmlns:mx="http://www.adobe.com/2006/mxml" 
+    horizontalAlign="center"
+    >
+    
+    <mx:Script>
+        <![CDATA[
+            import cn.geckos.crazyas.utils.SizeFormat;
+            import cn.geckos.shuttle.models.vo.ImageVO;
+        ]]>
+    </mx:Script>
+    
+    <mx:Image source="{File(data.file).url}" 
+        horizontalAlign="center" 
+        verticalAlign="middle"
+        filters="{[new DropShadowFilter(3, 45, 0, .3, 5, 5)]}"
+        width="100%" 
+        maxHeight="100"
+	    toolTip="{File(data.file).nativePath}{'\n'}Size:{SizeFormat.humanRead(File(data.file).size)}"
+        />
+        
+    <mx:ViewStack id="vs" width="100%"
+        selectedIndex="{data.state}"
+        >
+        <mx:Box width="100%" horizontalAlign="center">
+            <mx:Label text="{File(data.file).name}" maxWidth="145" />
+        </mx:Box>
+            
+        <mx:Box width="100%">
+	        <mx:ProgressBar minWidth="50" width="100%" 
+	            source="{data.file}"
+	            label="%3%%"
+	            labelPlacement="center" 
+	            height="5"/>
+        </mx:Box>
+        
+        <mx:Box width="100%" horizontalAlign="center">
+           <mx:Image source="assets/images/xiaoIcon/ok.png" />
+        </mx:Box>
+        
+        <mx:Box>
+            <mx:Label text="waitting..." />
+        </mx:Box>
+            
+    </mx:ViewStack>
+    
+</mx:Box>
