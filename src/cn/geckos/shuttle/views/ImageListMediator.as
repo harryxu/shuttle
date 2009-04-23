@@ -124,17 +124,22 @@ public class ImageListMediator extends Mediator
      */
     private function uploadBtnClickHandler(event:MenuEvent):void
     {
-        // 单击按钮上传选中的照片
-        var data:Object = component.list.selectedItems;
+        var data:Object;
         
         // 单击按钮菜单上传全部
-        if( event.index == 1 ) {
+        if (event.index == 1) 
+        {
             data = component.listData;
+        }
+        else  // 单击按钮上传选中的照片
+        {
+            data = component.list.selectedItems;
         }
         
         for each( var vo:ImageVO in data )
         {
-            if( vo.state == ImageVO.NOT_UPLOAD ) {
+            if (vo.state == ImageVO.NOT_UPLOAD) 
+            {
                 sendNotification(Notices.UPLOAD, vo);
             }
         }
@@ -150,22 +155,26 @@ public class ImageListMediator extends Mediator
         var data:Object = component.list.selectedItems;
         
         // 单击按菜单钮删除上传图片
-        if( event.index == 1 ) {
+        if (event.index == 1) 
+        {
             data = component.listData;
         }
         
         // 停止正在上传的文件
-        for each( var vo:ImageVO in component.list.selectedItems )
+        for each (var vo:ImageVO in component.list.selectedItems)
         {
-            if( vo.state == ImageVO.UPLOADING ) {
+            if (vo.state == ImageVO.UPLOADING) 
+            {
                 vo.cancelUpload();
             }
         }
         
-        if( event.index == 0 ) {
+        if (event.index == 0) 
+        {
 	        component.removeSelectedItems();
         }
-        else {
+        else 
+        {
             component.listData.removeAll();
         }
     }
@@ -177,7 +186,8 @@ public class ImageListMediator extends Mediator
     {
         //FIXME very dirty, to be refactory
         
-        if( !imageProMgr ) {
+        if (!imageProMgr) 
+        {
             imageProMgr = new PropertyManager();
             
             var panel:ImageSettingsPanel = component.settingsPanel
@@ -190,9 +200,11 @@ public class ImageListMediator extends Mediator
             imageProMgr.setEditor(new BooleanEditor(panel.fmlCheck), 'isFamily');
         }
         
-        if( component.list.selectedItems.length == 1 ) {
+        if (component.list.selectedItems.length == 1) 
+        {
             var data:Object = component.list.selectedItem;
-            if( data['isPublic'] == undefined ) {
+            if (data['isPublic'] == undefined) 
+            {
                 data['isPublic'] = true;
             }
             imageProMgr.getEditor('title').bindTo(new DefaultPropertyModeal(data, 'title'));
@@ -202,7 +214,8 @@ public class ImageListMediator extends Mediator
             imageProMgr.getEditor('isFriends').bindTo(new DefaultPropertyModeal(data, 'isFriends'));
             imageProMgr.getEditor('isFamily').bindTo(new DefaultPropertyModeal(data, 'isFamily'));
         }
-        else if( component.list.selectedItems.length > 1 ){
+        else if (component.list.selectedItems.length > 1)
+        {
             var items:Array = component.list.selectedItems;
             imageProMgr.getEditor('title').bindTo(new MultipleObjectsPropertyModel(items, 'title'));
             imageProMgr.getEditor('description').bindTo(new MultipleObjectsPropertyModel(items, 'description'));

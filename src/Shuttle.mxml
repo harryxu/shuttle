@@ -6,16 +6,16 @@
     xmlns:gks="cn.geckos.shuttle.views.components.*"
     creationComplete="init();">
     
-	<mx:Style source="assets/styles/kingnarestyle.css" />
+	<mx:Style source="assets/styles/kingnare.css" />
 	<mx:Style source="assets/styles/default.css" />
     
     <mx:Script>
         <![CDATA[
-            import cn.geckos.shuttle.AirupFacade;
+            import cn.geckos.shuttle.ShuttleFacade;
             
             private function init():void
             {
-                AirupFacade.getInstance().startup(this);
+                ShuttleFacade.getInstance().startup(this);
             }
             
             

@@ -1,5 +1,6 @@
 package cn.geckos.shuttle.models.vo
 {
+import flash.events.DataEvent;
 import flash.events.Event;
 import flash.events.EventDispatcher;
 import flash.events.IOErrorEvent;
@@ -34,6 +35,7 @@ dynamic public class ImageVO extends EventDispatcher
         file.addEventListener(Event.COMPLETE, completeHandler);
         file.addEventListener(Event.OPEN, openHandler);
         file.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
+        file.addEventListener(DataEvent.UPLOAD_COMPLETE_DATA, completeDataHandler);
     }
     
     public function wait():Boolean
@@ -52,6 +54,11 @@ dynamic public class ImageVO extends EventDispatcher
     {
         _state = UPLOADED;
         dispatchEvent( new PropertyChangeEvent(PropertyChangeEvent.PROPERTY_CHANGE));
+    }
+    
+    protected function completeDataHandler(event:DataEvent):void
+    {
+        trace('upload response', event.data);
     }
     
     protected function openHandler(event:Event):void

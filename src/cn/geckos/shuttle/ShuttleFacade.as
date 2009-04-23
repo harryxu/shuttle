@@ -5,17 +5,17 @@ import cn.geckos.shuttle.controllers.StartupCommand;
 import org.puremvc.as3.patterns.facade.Facade;
 import org.puremvc.as3.patterns.observer.Notification;
 
-public class AirupFacade extends Facade
+public class ShuttleFacade extends Facade
 {
     public static const STARTUP:String = 'startup';
     
     
-    private static var instance:AirupFacade;
+    private static var instance:ShuttleFacade;
     
-    public static function getInstance():AirupFacade
+    public static function getInstance():ShuttleFacade
     {
         if( !instance ) {
-            instance = new AirupFacade();
+            instance = new ShuttleFacade();
         }
         return instance;
     }

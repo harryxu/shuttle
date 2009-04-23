@@ -3,4 +3,31 @@
 global
 {
 	fontSize: 12;
+	openDuration: 100;
+	closeDuration: 100;
+}
+
+Button.addImgBtn
+{
+	upIcon: Embed(source="../images/xiaoIcon/add.png");
+	overIcon: Embed(source="../images/xiaoIcon/add.png");
+	downIcon: Embed(source="../images/xiaoIcon/add.png");
+	disabledIcon: Embed(source="../images/xiaoIcon/add.png");
+    
+}
+
+PopUpMenuButton.uploadBtn
+{
+    upIcon: Embed(source="../images/xiaoIcon/up.png");
+    overIcon: Embed(source="../images/xiaoIcon/up.png");
+    downIcon: Embed(source="../images/xiaoIcon/up.png");
+    disabledIcon: Embed(source="../images/xiaoIcon/up.png");
+}
+
+PopUpMenuButton.removeBtn
+{
+    upIcon: Embed(source="../images/xiaoIcon/rm.png");
+    overIcon: Embed(source="../images/xiaoIcon/rm.png");
+    downIcon: Embed(source="../images/xiaoIcon/rm.png");
+    disabledIcon: Embed(source="../images/xiaoIcon/rm.png");
 }

@@ -51,7 +51,7 @@ public function getUploadRequest(   service:FlickrService,
             if ( hidden ) sig += "hidden" + ( hidden ? 1 : 0 );
             if ( is_family ) sig += "is_family" + ( is_family ? 1 : 0 );
             if ( is_friend ) sig += "is_friend" + ( is_friend ? 1 : 0 );
-            if ( is_public ) sig += "is_public" + ( is_public ? 1 : 0 );
+            sig += "is_public" + ( is_public ? 1 : 0 );
             if ( safety_level != SafetyLevel.DEFAULT ) sig += "safety_level" + safety_level;
             if ( tags != "" ) sig += "tags" + tags;
             if ( title != "" ) sig += "title" + title;
@@ -67,7 +67,7 @@ public function getUploadRequest(   service:FlickrService,
             if ( hidden ) sig += vars.hidden = ( hidden ? 1 : 0 );
             if ( is_family ) vars.is_family = ( is_family ? 1 : 0 );
             if ( is_friend ) vars.is_friend = ( is_friend ? 1 : 0 );
-            if ( is_public ) vars.is_public = ( is_public ? 1 : 0 );
+            vars.is_public = ( is_public ? 1 : 0 );
             if ( safety_level != SafetyLevel.DEFAULT ) vars.safety_level = safety_level;
             if ( tags != "" ) vars.tags = tags;
             if ( title != "" ) vars.title = title;

@@ -5,6 +5,7 @@
 
     <mx:Script>
         <![CDATA[
+            import mx.controls.Menu;
             import mx.collections.ArrayCollection;
             
             [Bindable]
@@ -25,21 +26,27 @@
 
     <!--buttons-->
     <mx:HBox width="100%">
-	    <mx:Button id="addImgBtn" label="Add Images" />
+	    <mx:Button id="addImgBtn"
+	        styleName="addImgBtn"
+	        label="Add Images" />
 	    
 	    <mx:PopUpMenuButton id="uploadBtn"
+	        styleName="uploadBtn"
 	        label="Upload"
 	        toolTip="upload selected images"
 	        dataProvider="{['Upload selected images', 'Upload all images']}"
 	        enabled="{listData.length>0}"
+	        close="Menu(uploadBtn.popUp).selectedIndex=0"
 	        />
 	        
 	    <mx:PopUpMenuButton id="removeBtn"
+	        styleName="removeBtn"
 	        label="Remove" 
 	        toolTip="Remove selected images"
 	        dataProvider="{['Remove selected images', 'Remove all images']}"
 	        showRoot="false"
 	        enabled="{listData.length>0}"
+	        close="Menu(removeBtn.popUp).selectedIndex=0"
 	        />
     </mx:HBox>
     
