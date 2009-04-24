@@ -4,6 +4,7 @@ import cn.geckos.shuttle.Notices;
 import cn.geckos.shuttle.flickr.Developer;
 import cn.geckos.shuttle.models.FlickrServiceProxy;
 import cn.geckos.shuttle.views.ImageListMediator;
+import cn.geckos.shuttle.views.MenuMediator;
 import cn.geckos.shuttle.views.ProfileMediator;
 
 import com.adobe.webapis.flickr.FlickrService;
@@ -19,6 +20,7 @@ public class StartupCommand extends SimpleCommand
         
         // register mediators
         
+        facade.registerMediator( new MenuMediator(MenuMediator.NAME, app) );
         facade.registerMediator( new ProfileMediator(ProfileMediator.NAME, app.profileBox) );
         facade.registerMediator( new ImageListMediator(ImageListMediator.NAME, app.imageList) );
         

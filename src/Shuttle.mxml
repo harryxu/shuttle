@@ -11,13 +11,17 @@
     
     <mx:Script>
         <![CDATA[
+            import cn.geckos.shuttle.ShuttleUpdater;
             import cn.geckos.shuttle.ShuttleFacade;
             
             private function init():void
             {
+                // check for update
+                ShuttleUpdater.check();
+                
+                // start app
                 ShuttleFacade.getInstance().startup(this);
             }
-            
             
         ]]>
     </mx:Script>
