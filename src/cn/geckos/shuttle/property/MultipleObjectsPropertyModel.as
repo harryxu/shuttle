@@ -4,7 +4,7 @@ package cn.geckos.shuttle.property
 /**
  * 为一系列对象设置统一属性的 Model
  */    
-public class MultipleObjectsPropertyModel extends DefaultPropertyModeal
+public class MultipleObjectsPropertyModel extends DefaultPropertyModel
 {
     protected var _value:*;
     

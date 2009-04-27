@@ -5,7 +5,7 @@ import __AS3__.vec.Vector;
 import cn.geckos.shuttle.Notices;
 import cn.geckos.shuttle.models.vo.ImageVO;
 import cn.geckos.shuttle.property.BooleanEditor;
-import cn.geckos.shuttle.property.DefaultPropertyModeal;
+import cn.geckos.shuttle.property.DefaultPropertyModel;
 import cn.geckos.shuttle.property.EnumEditor;
 import cn.geckos.shuttle.property.MultipleObjectsPropertyModel;
 import cn.geckos.shuttle.property.MultipleTagsPropertyModel;
@@ -198,7 +198,14 @@ public class ImageListMediator extends Mediator
             imageProMgr.setEditor(new EnumEditor(panel.mainPrivacy), 'isPublic');
             imageProMgr.setEditor(new BooleanEditor(panel.friCheck), 'isFriends');
             imageProMgr.setEditor(new BooleanEditor(panel.fmlCheck), 'isFamily');
+            
+            imageProMgr.setEditor(new EnumEditor(panel.safetyCombo), 'safety');
+            imageProMgr.setEditor(new EnumEditor(panel.hiddenCombo), 'hidden');
+            imageProMgr.setEditor(new EnumEditor(panel.contentCombo), 'content');
         }
+        
+        var editorOwner:Object;
+        var modelCls:Class;
         
         if (component.list.selectedItems.length == 1) 
         {
@@ -207,23 +214,25 @@ public class ImageListMediator extends Mediator
             {
                 data['isPublic'] = true;
             }
-            imageProMgr.getEditor('title').bindTo(new DefaultPropertyModeal(data, 'title'));
-            imageProMgr.getEditor('description').bindTo(new DefaultPropertyModeal(data, 'description'));
-            imageProMgr.getEditor('tags').bindTo(new DefaultPropertyModeal(data, 'tags'));
-            imageProMgr.getEditor('isPublic').bindTo(new DefaultPropertyModeal(data, 'isPublic'));
-            imageProMgr.getEditor('isFriends').bindTo(new DefaultPropertyModeal(data, 'isFriends'));
-            imageProMgr.getEditor('isFamily').bindTo(new DefaultPropertyModeal(data, 'isFamily'));
+            editorOwner = data;
+            modelCls = DefaultPropertyModel;
+            
         }
         else if (component.list.selectedItems.length > 1)
         {
-            var items:Array = component.list.selectedItems;
-            imageProMgr.getEditor('title').bindTo(new MultipleObjectsPropertyModel(items, 'title'));
-            imageProMgr.getEditor('description').bindTo(new MultipleObjectsPropertyModel(items, 'description'));
-            imageProMgr.getEditor('tags').bindTo(new MultipleTagsPropertyModel(items, 'tags'));
-            imageProMgr.getEditor('isPublic').bindTo(new MultipleObjectsPropertyModel(items, 'isPublic'));
-            imageProMgr.getEditor('isFriends').bindTo(new MultipleObjectsPropertyModel(items, 'isFriends'));
-            imageProMgr.getEditor('isFamily').bindTo(new MultipleObjectsPropertyModel(items, 'isFamily'));
+            editorOwner = component.list.selectedItems;
+            modelCls = MultipleObjectsPropertyModel;
         }
+        imageProMgr.getEditor('title').bindTo(new modelCls(editorOwner, 'title'));
+        imageProMgr.getEditor('description').bindTo(new modelCls(editorOwner, 'description'));
+        imageProMgr.getEditor('tags').bindTo(new modelCls(editorOwner, 'tags'));
+        imageProMgr.getEditor('isPublic').bindTo(new modelCls(editorOwner, 'isPublic'));
+        imageProMgr.getEditor('isFriends').bindTo(new modelCls(editorOwner, 'isFriends'));
+        imageProMgr.getEditor('isFamily').bindTo(new modelCls(editorOwner, 'isFamily'));
+        
+        imageProMgr.getEditor('safety').bindTo(new modelCls(editorOwner, 'safety'));
+        imageProMgr.getEditor('hidden').bindTo(new modelCls(editorOwner, 'hidden'));
+        imageProMgr.getEditor('content').bindTo(new modelCls(editorOwner, 'content'));
     }
     
     //

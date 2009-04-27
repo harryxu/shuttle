@@ -1,5 +1,6 @@
 package cn.geckos.shuttle.views
 {
+import cn.geckos.shuttle.ShuttleUpdater;
 import cn.geckos.shuttle.views.components.AboutWindow;
 
 import flash.display.NativeMenu;
@@ -44,6 +45,12 @@ public class MenuMediator extends Mediator
         // Help
         var helpItem:NativeMenuItem = new NativeMenuItem('Help');
         helpItem.submenu = new NativeMenu();
+            // Check update
+            var update:NativeMenuItem = new NativeMenuItem('Check for update now...');
+            update.addEventListener(Event.SELECT, checkUpdateSelectHandler);
+            helpItem.submenu.addItem(update);
+            
+            // About
             var about:NativeMenuItem = new NativeMenuItem('About Shuttle');
             about.addEventListener(Event.SELECT, helpSelectHandler);
             helpItem.submenu.addItem(about);
@@ -58,6 +65,11 @@ public class MenuMediator extends Mediator
         var display:IFlexDisplayObject = new AboutWindow();
         PopUpManager.addPopUp(display, app, true);
         PopUpManager.centerPopUp(display);
+    }
+    
+    private function checkUpdateSelectHandler(event:Event):void
+    {
+        ShuttleUpdater.checkNow();
     }
         
 }

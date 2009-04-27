@@ -8,6 +8,10 @@
     
 	<mx:Style source="assets/styles/kingnare.css" />
 	<mx:Style source="assets/styles/default.css" />
+	
+	<mx:Metadata>
+	    [ResourceBundle("lang")]
+	</mx:Metadata>
     
     <mx:Script>
         <![CDATA[
@@ -16,8 +20,8 @@
             
             private function init():void
             {
-                // check for update
-                ShuttleUpdater.check();
+                // initialize update UI
+                ShuttleUpdater.initialize();
                 
                 // start app
                 ShuttleFacade.getInstance().startup(this);

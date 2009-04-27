@@ -1,33 +1,39 @@
 package cn.geckos.shuttle
 {
 import air.update.ApplicationUpdaterUI;
-import air.update.events.UpdateEvent;
 
 import flash.filesystem.File;
     
 public final class ShuttleUpdater
 {
+    
+    private static var updaterUI:ApplicationUpdaterUI;
+    
+    public static function get currentVersion():String
+    {
+        initialize();
+        return updaterUI.currentVersion;
+    }
 	
-	public static function check():void
+	public static function initialize():void
 	{
-        var updater:ApplicationUpdaterUI = new ApplicationUpdaterUI();
-        updater.configurationFile = new File('app:/updateConfig.xml');
-        
-        updater.addEventListener(UpdateEvent.CHECK_FOR_UPDATE, checkUpdateHandler);
-	    
-	    //updater.initialize();
-	    updater.checkNow();
+	    if (!updaterUI)
+	    {
+	        updaterUI = new ApplicationUpdaterUI();
+	        updaterUI.configurationFile = new File('app:/updateConfig.xml');
+		    updaterUI.initialize();
+	    }
 	}
 	
-    public static function checkUpdateHandler(event:UpdateEvent):void
-    {
-        trace('check update');
-    }
+	public static function checkNow():void
+	{
+	    initialize();
+	    updaterUI.isCheckForUpdateVisible = true;
+	    updaterUI.checkNow();
+	}
 	
-    public function ShuttleUpdater()
-    {
-        throw new Error('static class!');
-    }
+	
+	
     
 
 }

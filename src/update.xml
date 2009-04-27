@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?> 
  <update xmlns="http://ns.adobe.com/air/framework/update/description/1.0"> 
    <version>0.2</version> 
-   <url>Shuttle.air</url> 
+   <url>http://dl.getdropbox.com/u/130618/downloads/Shuttle.air</url> 
    <description> 
        <text xml:lang="en">English description</text> 
        <text xml:lang="fr">French description</text> 

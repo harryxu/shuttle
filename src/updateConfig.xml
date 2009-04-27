@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <configuration xmlns="http://ns.adobe.com/air/framework/update/configuration/1.0"> 
-      <url>update.xml</url> 
+      <url>http://geckos.cn/gtools/shuttle/update.xml</url> 
+      <delay>0.5</delay> 
+      
+      <defaultUI> 
+         <dialog name="checkForUpdate" visible="false" /> 
+         <dialog name="downloadUpdate" visible="true" /> 
+         <dialog name="downloadProgress" visible="true" /> 
+      </defaultUI> 
+      
 </configuration>

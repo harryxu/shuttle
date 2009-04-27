@@ -1,11 +1,11 @@
 package cn.geckos.shuttle.property
 {
-public class DefaultPropertyModeal implements IPropertyModel
+public class DefaultPropertyModel implements IPropertyModel
 {
     protected var propertyName:String;
     protected var owner:Object;
     
-    public function DefaultPropertyModeal(owner:Object, propertyName:String, value:*=null)
+    public function DefaultPropertyModel(owner:Object, propertyName:String, value:*=null)
     {
         this.propertyName = propertyName;
         this.owner = owner;
