@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties mainApplicationPath="Shuttle.mxml" version="3">
-<compiler additionalCompilerArguments="-locale=en_US -allow-source-path-overlap=true" copyDependentFiles="true" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="true" warn="true">
-<compilerSourcePath>
-<compilerSourcePathEntry kind="1" linkType="1" path="libs"/>
-<compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
-</compilerSourcePath>
-<libraryPath defaultLinkType="1">
-<libraryPathEntry kind="4" path=""/>
-<libraryPathEntry kind="1" linkType="1" path="libs"/>
-<libraryPathEntry kind="3" linkType="1" path="/crazyas/bin/crazyas.swc" useDefaultLinkType="false"/>
-</libraryPath>
-<sourceAttachmentPath/>
-</compiler>
-<applications>
-<application path="Shuttle.mxml"/>
-</applications>
-<modules/>
-<buildCSSFiles>
-<buildCSSFileEntry destPath="bin-debug" sourcePath="src/assets/styles/_kingnarestyle.css"/>
-<buildCSSFileEntry destPath="bin-debug" sourcePath="src/assets/styles/stylekingnare.css"/>
-</buildCSSFiles>
+  <compiler additionalCompilerArguments="-locale=en_US -allow-source-path-overlap=true" copyDependentFiles="true" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="true" warn="true">
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" linkType="1" path="libs"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
+    </compilerSourcePath>
+    <libraryPath defaultLinkType="1">
+      <libraryPathEntry kind="4" path=""/>
+      <libraryPathEntry kind="1" linkType="1" path="libs"/>
+      <libraryPathEntry kind="3" linkType="1" path="/crazyas/bin/crazyas.swc" useDefaultLinkType="false"/>
+    </libraryPath>
+    <sourceAttachmentPath/>
+  </compiler>
+  <applications>
+    <application path="Shuttle.mxml"/>
+  </applications>
+  <modules/>
+  <buildCSSFiles>
+    <buildCSSFileEntry destPath="bin-debug" sourcePath="src/assets/styles/_kingnarestyle.css"/>
+    <buildCSSFileEntry destPath="bin-debug" sourcePath="src/assets/styles/stylekingnare.css"/>
+  </buildCSSFiles>
 </actionScriptProperties>
