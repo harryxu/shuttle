@@ -1,17 +1,23 @@
-说明 :    * 表示计划中还未处理，  @ 表示正在开发中 ， & 表示已完成   
+说明 :    * 表示计划中还未处理 / Plan
+         @ 表示正在开发中 / Developing
+         & 表示已完成   / Complete
 
 
-    @ 基本功能
-        @ 基本上传功能
-        & 从外部拖放图片到程序中
+    @ 基本功能 / Basic
     
-    * 国际化
-    
-    * 多服务支持
-        @ flickr 支持
+        @ 基本上传功能 / Basic upload functions.
+        & 从外部拖放图片到程序中 / Drag and drop.
         
-    * 多账户管理
+    @ 国际化 / Localizing.
+    
+    * 多服务支持 / Multi service support
+    
+        @ flickr 支持 / flickr support
+        
+    * 实现插件机制，提供扩展API / Plugin API support.
+        
+    * 多账户管理 / Multi accounts manager.
    
-    * 搞个图标
+    @ 搞个图标 / Icons
    
     
