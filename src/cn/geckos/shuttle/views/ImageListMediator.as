@@ -2,13 +2,13 @@ package cn.geckos.shuttle.views
 {
 import __AS3__.vec.Vector;
 
+import cn.geckos.crazyas.utils.SizeFormat;
 import cn.geckos.shuttle.Notices;
 import cn.geckos.shuttle.models.vo.ImageVO;
 import cn.geckos.shuttle.property.BooleanEditor;
 import cn.geckos.shuttle.property.DefaultPropertyModel;
 import cn.geckos.shuttle.property.EnumEditor;
 import cn.geckos.shuttle.property.MultipleObjectsPropertyModel;
-import cn.geckos.shuttle.property.MultipleTagsPropertyModel;
 import cn.geckos.shuttle.property.PropertyManager;
 import cn.geckos.shuttle.property.StringEditor;
 import cn.geckos.shuttle.views.components.ImageListBox;
@@ -23,8 +23,10 @@ import flash.events.NativeDragEvent;
 import flash.filesystem.File;
 import flash.net.FileFilter;
 
+import mx.events.CollectionEvent;
 import mx.events.ListEvent;
 import mx.events.MenuEvent;
+import mx.resources.ResourceManager;
 
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.mediator.Mediator;
@@ -67,10 +69,12 @@ public class ImageListMediator extends Mediator
         component.addImgBtn.addEventListener(MouseEvent.CLICK, addImgBtnClickHandler);
         component.uploadBtn.addEventListener(MenuEvent.ITEM_CLICK, uploadBtnClickHandler);
         component.removeBtn.addEventListener(MenuEvent.ITEM_CLICK, removeBtnClickHandler);
-        component.list.addEventListener(ListEvent.CHANGE, listChangeHandler);
         
+        component.list.addEventListener(ListEvent.CHANGE, listChangeHandler);
         component.list.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, dragEnterHandler);
         component.list.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, dragDropHandler);
+        
+        component.listData.addEventListener(CollectionEvent.COLLECTION_CHANGE, dataChangeHandler);
     }
     
     private function getFile():File
@@ -233,6 +237,24 @@ public class ImageListMediator extends Mediator
         imageProMgr.getEditor('safety').bindTo(new modelCls(editorOwner, 'safety'));
         imageProMgr.getEditor('hidden').bindTo(new modelCls(editorOwner, 'hidden'));
         imageProMgr.getEditor('content').bindTo(new modelCls(editorOwner, 'content'));
+    }
+    
+    private function dataChangeHandler(event:CollectionEvent):void
+    {
+        var numPhotos:Number = component.listData.length;
+        var size:Number = 0;
+        var numUploaded:Number = 0
+        for each(var vo:ImageVO in component.listData)
+        {
+            size += vo.file.size;
+            if (vo.state == ImageVO.UPLOADED)
+            {
+                numUploaded++;
+            }
+        }
+        component.photoStat.text = 
+            ResourceManager.getInstance().getString('lang', 'photoStat', 
+                        [numPhotos, SizeFormat.humanRead(size), numUploaded]);
     }
     
     //

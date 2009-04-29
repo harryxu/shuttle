@@ -51,7 +51,6 @@
     </mx:HBox>
     
     <mx:HBox width="100%" height="100%">
-    
         <mx:TileList id="list"
             dataProvider="{listData}"
             itemRenderer="cn.geckos.shuttle.views.components.ThumbListRenderer"
@@ -67,8 +66,8 @@
              width="350"
              enabled="{list.selectedItems.length>0}" 
              />
-             
-            
     </mx:HBox>
+    
+    <mx:Label id="photoStat" />
     
 </mx:VBox>
